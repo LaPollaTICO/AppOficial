@@ -1,0 +1,3335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>La Polla "TICO"</title>
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="theme-color" content="#16342A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name='apple-mobile-web-app-title' content='La Polla TICO'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --pitch: #16342A;
+  --pitch-dark: #0E241D;
+  --chalk: #F6F3EA;
+  --floodlight: #F2C14E;
+  --ink: #10202B;
+  --red-card: #D64545;
+  --green-up: #4CAF6D;
+  --line: rgba(246,243,234,0.14);
+}
+*{box-sizing:border-box; min-width:0;}
+html,body{margin:0;padding:0; overflow-x:hidden;}
+body{
+  background: var(--pitch-dark);
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 40px);
+  font-family:'Inter', sans-serif;
+  color:var(--chalk);
+  min-height:100vh;
+  padding-bottom:60px;
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px;}
+.hidden{display:none !important;}
+
+/* ============ LANDING ============ */
+#landingScreen{padding-top:10px;}
+@keyframes floatMascot{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes fadeSlideUp{from{opacity:0; transform:translateY(16px);}to{opacity:1; transform:translateY(0);}}
+.hero{text-align:center; padding:30px 18px 6px; animation:fadeSlideUp 0.5s ease both;}
+.mascot-wrap{width:170px; height:170px; margin:0 auto 4px; animation:floatMascot 3.5s ease-in-out infinite;}
+.mascot-wrap img{width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 10px 16px rgba(0,0,0,0.45));}
+.hero h1{
+  font-family:'Anton', sans-serif; font-size:40px; letter-spacing:1px; margin:2px 0 6px; text-transform:uppercase; line-height:0.98;
+  background:linear-gradient(180deg, var(--chalk), #d9d3bd); -webkit-background-clip:text; background-clip:text;
+}
+.slogan{color:var(--floodlight); font-weight:700; font-size:13.5px; letter-spacing:1.5px; text-transform:uppercase; margin:0 0 26px;}
+
+.polla-card{
+  background:linear-gradient(135deg, var(--pitch), var(--pitch-dark));
+  border:2px solid var(--floodlight); border-radius:22px;
+  margin-bottom:16px; cursor:pointer; position:relative; overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.35); transition:transform 0.15s ease;
+  animation:fadeSlideUp 0.5s ease 0.05s both;
+  display:flex; align-items:stretch; min-height:168px;
+}
+.polla-card:active{transform:scale(0.98);}
+.polla-card .logo-third{width:33%; flex-shrink:0; background:var(--ink); position:relative; overflow:hidden;}
+.polla-card .logo-third img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+.polla-card .logo-third .no-logo{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; opacity:0.35;}
+.polla-card .logo-third .no-logo svg{width:42px; height:42px; color:var(--floodlight);}
+.polla-card .card-body{padding:16px 18px; flex:1; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; gap:2px;}
+.polla-card .card-body::before{content:''; position:absolute; top:-40%; right:-20%; width:140px; height:140px; background:radial-gradient(circle, rgba(242,193,78,0.18), transparent 70%);}
+.status-pill{font-size:10px; letter-spacing:1.5px; font-weight:800; text-transform:uppercase; padding:3px 9px; border-radius:20px; display:inline-block;}
+.status-pill.actual{background:rgba(76,175,109,0.2); color:#7CE0A0;}
+.status-pill.finalizada{background:rgba(242,193,78,0.2); color:var(--floodlight);}
+.status-pill.free-pill{background:rgba(242,193,78,0.25); color:var(--floodlight); margin-left:6px;}
+.polla-card h2{font-family:'Anton'; font-size:24px; margin:6px 0 6px; text-transform:uppercase; position:relative; width:100%;}
+.polla-card .start-date.soon{color:var(--red-card); font-weight:800;}
+.polla-card .stats{display:flex; gap:12px; font-size:12px; color:rgba(246,243,234,0.75); position:relative; width:100%; margin-top:2px; flex-wrap:wrap;}
+.polla-card .stats .stat-item{display:flex; align-items:center; gap:6px;}
+.polla-card .stats .stat-icon{width:14px; height:14px; color:var(--floodlight); flex-shrink:0;}
+.polla-card .stats b{color:var(--chalk); font-family:'Anton'; font-size:15px; font-weight:400;}
+.polla-card .enter{margin-top:12px; font-weight:800; color:var(--ink); background:var(--floodlight); display:inline-block; padding:8px 14px; border-radius:9px; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; position:relative;}
+
+.upcoming-card{background:rgba(246,243,234,0.05); border:1px dashed rgba(246,243,234,0.25); border-radius:16px; padding:16px 18px; margin-bottom:22px; text-align:center; color:rgba(246,243,234,0.55); font-size:13px; animation:fadeSlideUp 0.5s ease 0.1s both;}
+.upcoming-card b{display:block; color:var(--floodlight); font-family:'Anton'; font-size:18px; margin-bottom:2px; text-transform:uppercase;}
+
+.landing-links{display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;}
+.landing-links button{flex:1; min-width:100px; background:rgba(246,243,234,0.06); border:1px solid var(--line); color:var(--chalk); padding:13px 6px; border-radius:12px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:0.3px; cursor:pointer; font-family:'Inter';}
+.no-pollas{text-align:center; padding:50px 20px; color:rgba(246,243,234,0.5);}
+
+/* ============ APP INTERNO ============ */
+#appScreen header{padding:20px 0 12px; text-align:center;}
+.header-topbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;}
+.admin-ball-btn{background:rgba(246,243,234,0.05); border:none; color:rgba(246,243,234,0.28); font-size:17px; cursor:pointer; width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; line-height:1; padding:0;}
+.admin-ball-btn:active{background:rgba(242,193,78,0.15); color:var(--floodlight);}
+.back-btn{background:rgba(246,243,234,0.08); border:none; color:var(--floodlight); font-size:13px; font-weight:700; cursor:pointer; padding:8px 14px; border-radius:20px; display:inline-flex; align-items:center; gap:4px;}
+.eyebrow{font-size:12px; letter-spacing:3px; color:var(--floodlight); font-weight:700; text-transform:uppercase;}
+h1{font-family:'Anton', sans-serif; font-size:30px; letter-spacing:1px; margin:6px 0 4px; text-transform:uppercase; line-height:0.95;}
+.subtitle{color:rgba(246,243,234,0.6); font-size:13.5px; margin:0;}
+
+.tools-row{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
+.tools-row button{flex:1; min-width:70px; background:rgba(242,193,78,0.1); border:1px solid var(--floodlight); color:var(--floodlight); padding:10px 4px; border-radius:10px; font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:0.2px; cursor:pointer; font-family:'Inter'; white-space:nowrap;}
+.winners-row{display:flex; justify-content:center; margin:-6px 0 16px;}
+.winners-row #winnersToolBtn{background:var(--floodlight); border:1px solid var(--floodlight); color:var(--ink); padding:9px 24px; border-radius:20px; font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:0.3px; cursor:pointer; font-family:'Inter'; box-shadow:0 3px 10px rgba(242,193,78,0.35);}
+@media (max-width:360px){
+  .tools-row button{font-size:9.5px; letter-spacing:0; padding:9px 2px;}
+}
+
+.name-card{background:var(--pitch); border:1px solid var(--line); border-radius:16px; padding:16px 18px; margin-bottom:6px; display:flex; align-items:center; gap:10px; flex-wrap:nowrap;}
+.name-card label{font-size:13px; font-weight:700; color:var(--floodlight); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; flex-shrink:0;}
+.name-field{flex:1; min-width:0; display:flex; align-items:flex-end; border-bottom:2px solid var(--line);}
+.name-field.authed{border-bottom-color:var(--green-up);}
+.name-card input{width:100%; min-width:0; background:transparent; border:none; color:var(--chalk); font-family:'Inter'; font-size:16px; font-weight:600; padding:6px 2px; outline:none;}
+.check-btn{flex-shrink:0; width:38px; height:38px; border-radius:10px; border:none; background:var(--floodlight); color:var(--ink); font-size:16px; font-weight:900; cursor:pointer;}
+.name-status{font-size:12px; text-align:center; margin:6px 0 12px; font-weight:600; min-height:16px;}
+.name-status.ok{color:var(--green-up);}
+.name-status.err{color:var(--red-card);}
+.pin-locked-box{background:rgba(214,69,69,0.12); border:1px solid var(--red-card); border-radius:12px; padding:12px 14px; text-align:center; font-size:12.5px; color:var(--chalk); margin-bottom:18px;}
+.pay-pending-banner{background:rgba(242,193,78,0.15); border:1px solid var(--floodlight); border-radius:12px; padding:10px 14px; text-align:center; font-size:12.5px; font-weight:700; color:var(--floodlight); margin-bottom:14px;}
+.pin-locked-box b{display:block; color:var(--red-card); margin-bottom:2px;}
+.pin-locked-box button{background:none; border:none; color:var(--floodlight); font-weight:700; text-decoration:underline; cursor:pointer; font-size:12.5px; margin-top:4px;}
+.pozo-box{background:rgba(46,160,90,0.12); border:1px solid #2ea05a; border-radius:12px; padding:12px 14px; text-align:left; font-size:13px; color:var(--ink); font-weight:700; margin-bottom:18px; line-height:1.6;}
+.pozo-box b{display:block; color:#2ea05a; font-size:14px; margin-bottom:2px;}
+
+.invite-row{text-align:center; margin-bottom:16px;}
+.invite-row button{background:rgba(242,193,78,0.12); border:1px solid var(--floodlight); color:var(--floodlight); padding:10px 16px; border-radius:20px; font-size:12.5px; font-weight:700; cursor:pointer; font-family:'Inter';}
+
+.date-group{margin-bottom:8px;}
+.date-group-header{display:flex; align-items:center; gap:10px; padding:14px 4px 12px; border-bottom:1px solid var(--line); margin-bottom:16px; cursor:pointer; -webkit-tap-highlight-color:transparent;}
+.date-group-label{font-family:'Anton', sans-serif; font-size:15px; letter-spacing:1px; color:rgba(246,243,234,0.55); text-transform:uppercase; flex-shrink:0; white-space:nowrap;}
+.date-group-pill{margin-left:auto; background:rgba(242,193,78,0.14); color:var(--floodlight); font-size:11px; font-weight:800; letter-spacing:0.5px; padding:5px 12px; border-radius:20px; text-transform:uppercase; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:150px;}
+.date-group-chevron{color:rgba(246,243,234,0.45); font-size:16px; transition:transform 0.2s ease; transform:rotate(-90deg); flex-shrink:0;}
+.date-group-chevron.open{transform:rotate(0deg);}
+.date-group-body.hidden{display:none;}
+.match{background:var(--pitch); border:1px solid var(--line); border-radius:20px; margin-bottom:22px; overflow:visible; position:relative;}
+.match.star-match{border:2px solid var(--floodlight); box-shadow:0 0 0 3px rgba(242,193,78,0.18), 0 10px 30px rgba(0,0,0,0.3);}
+.match.canceled-match{border:2px solid var(--red-card); opacity: 0.9;}
+.match-inner{border-radius:18px; overflow:hidden; position:relative;}
+.match.closed .match-inner{opacity:0.7;}
+.match-photo{width:100%; max-height:340px; object-fit:contain; display:block; background:var(--ink);}
+.ticket-notch{position:relative; height:0;}
+.ticket-notch::before, .ticket-notch::after{content:''; position:absolute; top:-9px; width:18px; height:18px; background:var(--pitch-dark); border-radius:50%; z-index:3;}
+.ticket-notch::before{left:-9px;}
+.ticket-notch::after{right:-9px;}
+.ticket-dashes{border-top:2px dashed rgba(246,243,234,0.18); margin:0 16px;}
+.match-top{padding:14px 20px 0; display:flex; justify-content:space-between; align-items:flex-start; gap:8px;}
+.matchnum{font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--floodlight); font-weight:700;}
+.close-time{font-size:12px; color:rgba(246,243,234,0.55); font-weight:600; margin-top:2px;}
+.close-time.past{color:var(--red-card);}
+.close-time.soon{color:var(--floodlight); font-weight:800;}
+.badges-row{display:flex; flex-direction:column; align-items:flex-end; gap:6px; flex-shrink:0;}
+.soon-badge{background:var(--red-card); color:#fff; font-size:10.5px; font-weight:800; padding:4px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; animation:pulseBadge 1.4s infinite;}
+.star-badge-inline{background:var(--floodlight); color:var(--ink); font-size:10.5px; font-weight:800; padding:4px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; box-shadow:0 2px 6px rgba(242,193,78,0.4);}
+.canceled-badge-inline{background:var(--red-card); color:#fff; font-size:10.5px; font-weight:800; padding:4px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap;}
+.streak-badge{display:inline-flex; align-items:center; gap:3px; background:var(--floodlight); color:var(--ink); font-size:12px; font-weight:800; padding:3px 9px; border-radius:20px; margin-left:8px; box-shadow:0 2px 6px rgba(242,193,78,0.4); vertical-align:middle;}
+.mini-leaderboard{position:fixed; bottom:18px; right:14px; background:var(--pitch); color:var(--floodlight); font-size:12.5px; font-weight:800; padding:8px 14px; border-radius:22px; box-shadow:0 4px 14px rgba(0,0,0,.35); z-index:60; border:1px solid rgba(242,193,78,0.4);}
+@keyframes pulseBadge{0%,100%{opacity:1;}50%{opacity:0.55;}}
+
+.teams-row{display:flex; align-items:center; justify-content:center; gap:14px; padding:16px 16px 6px;}
+.team-name{font-family:'Anton', sans-serif; font-size:19px; text-transform:uppercase; text-align:center; flex:1; letter-spacing:0.5px;}
+.vs{font-family:'Anton', sans-serif; font-size:14px; color:rgba(246,243,234,0.4);}
+
+.poll-bar-row{padding:0 20px 10px;}
+.poll-bar{display:flex; height:8px; border-radius:6px; overflow:hidden; background:rgba(246,243,234,0.08);}
+.poll-bar .seg-home{background:var(--floodlight);}
+.poll-bar .seg-draw{background:rgba(246,243,234,0.35);}
+.poll-bar .seg-away{background:#2E86AB;}
+.poll-labels{display:flex; justify-content:space-between; font-size:11.5px; color:rgba(246,243,234,0.7); margin-top:4px;}
+
+.score-row{display:flex; align-items:center; justify-content:center; gap:20px; padding:10px 16px 14px;}
+.stepper{display:flex; flex-direction:column; align-items:center; gap:8px;}
+.stepper button{width:44px; height:40px; border-radius:10px; border:none; background:rgba(246,243,234,0.12); color:var(--chalk); font-size:22px; font-weight:700; cursor:pointer;}
+.stepper button:active{background:var(--floodlight); color:var(--ink);}
+.stepper button:disabled{opacity:0.3; cursor:not-allowed;}
+.score-input{
+  font-family:'Anton', sans-serif; font-size:38px; width:68px; height:58px; text-align:center;
+  background:var(--ink); border:2px solid var(--floodlight); border-radius:12px; color:var(--floodlight);
+  outline:none; padding:0; box-shadow:inset 0 2px 6px rgba(0,0,0,0.5);
+}
+.score-input:focus{border-color:#fff; box-shadow:0 0 12px rgba(242,193,78,0.5);}
+.score-input:disabled{background:rgba(16,32,43,0.5); border-color:rgba(246,243,234,0.2); color:rgba(246,243,234,0.4);}
+.score-input::-webkit-outer-spin-button, .score-input::-webkit-inner-spin-button{-webkit-appearance:none; margin:0;}
+.score-input[type=number]{-moz-appearance:textfield;}
+.dash{font-family:'Anton'; font-size:28px; color:rgba(246,243,234,0.3); align-self:center;}
+
+.match-footer{padding:0 20px 20px;}
+.submit-btn{width:100%; background:var(--floodlight); color:var(--ink); border:none; border-radius:12px; padding:14px; font-size:16px; font-weight:800; text-transform:uppercase; letter-spacing:1px; cursor:pointer; font-family:'Inter';}
+.submit-btn:disabled{background:rgba(246,243,234,0.15); color:rgba(246,243,234,0.4); cursor:not-allowed;}
+.submit-btn.sent{background:#3B7A57; color:var(--chalk);}
+.submit-btn.secondary{background:rgba(246,243,234,0.1); color:var(--chalk); margin-top:8px;}
+.submit-btn.share{background:#25D366; color:#fff; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:6px;}
+.status-line{text-align:center; font-size:13px; color:rgba(246,243,234,0.6); margin-top:8px;}
+.lock-note{text-align:center; font-size:13px; color:rgba(246,243,234,0.45); padding:16px 20px;}
+
+.result-banner{background:rgba(59,122,87,0.18); border:1px solid #3B7A57; border-radius:12px; padding:14px; text-align:center; margin:14px 20px 16px;}
+.result-banner .score{font-family:'Anton'; font-size:26px; color:#8FD9AA;}
+.result-banner .pts{font-size:14px; color:var(--chalk); margin-top:6px; font-weight:700;}
+.breakdown-toggle{background:none; border:none; color:var(--floodlight); font-size:11.5px; font-weight:700; cursor:pointer; margin-top:8px; padding:0; font-family:'Inter';}
+.pts-breakdown{font-size:11.5px; color:rgba(246,243,234,0.55); margin-top:8px; line-height:1.5; font-weight:500;}
+
+.stamp{position:absolute; top:16px; right:16px; border:2px solid var(--red-card); color:var(--red-card); font-family:'Anton'; font-size:13px; letter-spacing:1px; padding:4px 10px; border-radius:6px; transform:rotate(8deg); text-transform:uppercase; background:var(--pitch-dark); z-index:2;}
+
+.empty{text-align:center; padding:60px 20px; color:rgba(246,243,234,0.5);}
+.empty .ball{font-size:38px; margin-bottom:14px;}
+.loading-msg{text-align:center; padding:40px 20px; color:rgba(246,243,234,0.4); font-size:14px;}
+
+.admin-link{text-align:center; margin-top:30px;}
+.admin-link button{background:none; border:none; color:rgba(246,243,234,0.35); font-size:12px; letter-spacing:1px; text-transform:uppercase; cursor:pointer; font-family:'Inter';}
+.admin-summary{font-size:12px; color:#5a6b63; margin-top:8px; font-weight:600;}
+.contact-admin-row{text-align:center; margin-top:18px;}
+.contact-admin-row button{background:rgba(37,211,102,0.1); border:1px solid rgba(37,211,102,0.4); color:#8fdba8; padding:10px 16px; border-radius:20px; font-size:12.5px; font-weight:600; cursor:pointer; font-family:'Inter';}
+
+/* ============ ENVÍO MASIVO / CASILLAS SELECCIÓN ============ */
+.bulk-toggle-row{text-align:center; margin:0 0 16px;}
+.bulk-toggle{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:rgba(246,243,234,0.75); cursor:pointer; background:rgba(246,243,234,0.06); border:1px solid var(--line); padding:9px 14px; border-radius:20px;}
+.bulk-toggle input{width:18px; height:18px; accent-color:var(--floodlight); cursor:pointer;}
+.bulk-bar{position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:250; width:calc(100% - 36px); max-width:600px;}
+.bulk-bar .submit-btn{box-shadow:0 10px 28px rgba(0,0,0,0.4);}
+
+.match-bulk-select{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--floodlight);
+  background: rgba(242, 193, 78, 0.12);
+  border: 1px solid rgba(242, 193, 78, 0.4);
+  padding: 12px 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.match-bulk-select input{
+  width: 20px;
+  height: 20px;
+  accent-color: var(--floodlight);
+  cursor: pointer;
+}
+
+/* ============ OVERLAYS / MODAL ============ */
+@keyframes overlayFade{from{opacity:0;}to{opacity:1;}}
+@keyframes modalPop{from{opacity:0; transform:translateY(24px) scale(0.96);}to{opacity:1; transform:translateY(0) scale(1);}}
+.overlay{position:fixed; inset:0; background:rgba(9,20,15,0.72); backdrop-filter:blur(3px); display:none; align-items:center; justify-content:center; z-index:50; padding:18px; animation:overlayFade 0.2s ease;}
+.overlay.show{display:flex;}
+.modal{background:var(--chalk); color:var(--ink); width:100%; max-width:520px; border-radius:24px; padding:26px 24px 28px; max-height:85vh; overflow-y:auto; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.5); animation:modalPop 0.25s cubic-bezier(.2,.9,.3,1.2) both; border:1px solid rgba(0,0,0,0.05);}
+.modal-icon{font-size:34px; text-align:center; margin-bottom:4px;}
+.modal h2{font-family:'Anton'; text-transform:uppercase; margin:0 0 16px; font-size:22px; text-align:center;}
+.modal h3{font-family:'Anton'; text-transform:uppercase; margin:22px 0 4px; font-size:16px; color:var(--pitch);}
+.modal label{display:block; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#5a6b63; margin:14px 0 5px;}
+.modal input, .modal select, .modal textarea{width:100%; padding:11px 12px; border-radius:9px; border:1px solid #d8d3c3; font-family:'Inter'; font-size:15px; background:#fff;}
+.modal textarea{min-height:90px; resize:vertical;}
+.modal .row2{display:flex; gap:12px;}
+.modal .row2 > div{flex:1;}
+.modal .checkbox-row{display:flex; align-items:flex-start; gap:8px; margin-top:14px;}
+.modal .checkbox-row input{width:auto; flex-shrink:0; margin-top:3px;}
+.modal .checkbox-row label{margin:0;}
+.btn-primary{width:100%; margin-top:16px; background:var(--pitch); color:var(--chalk); border:none; padding:14px; border-radius:12px; font-weight:800; text-transform:uppercase; letter-spacing:1px; cursor:pointer;}
+.btn-primary:disabled{opacity:0.5;}
+.btn-secondary{width:100%; margin-top:10px; background:none; border:1px solid #c9c3ae; color:var(--ink); padding:12px; border-radius:12px; font-weight:700; cursor:pointer;}
+.btn-whatsapp{width:100%; margin-top:4px; margin-bottom:18px; background:#25D366; border:none; color:#fff; padding:12px; border-radius:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;}
+.btn-danger{background:var(--red-card); color:#fff; border:none; padding:10px 14px; border-radius:10px; font-weight:700; cursor:pointer;}
+.hint{font-size:12px; color:#6b6454; margin-top:4px;}
+.close-x{position:absolute; top:14px; right:14px; background:#efece1; border:none; width:32px; height:32px; border-radius:50%; font-size:15px; cursor:pointer; color:#5a6b63; display:flex; align-items:center; justify-content:center;}
+.qr-box{display:flex; justify-content:center; padding:16px 0;}
+.qr-box canvas, .qr-box img{border-radius:12px;}
+
+.admin-tabs{display:flex; gap:6px; margin-bottom:6px; flex-wrap:wrap;}
+.admin-tabs button{background:#efece1; border:none; padding:8px 12px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; color:#5a6b63;}
+.admin-tabs button.active{background:var(--pitch); color:var(--chalk);}
+.admin-pane{display:none;}
+.admin-pane.active{display:block;}
+
+.list-item{border:1px solid #e0dccc; border-radius:12px; padding:12px 14px; margin-top:10px;}
+.list-item .top-row{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap;}
+.list-item .info{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; flex-wrap:wrap; flex:1 1 180px; min-width:0;}
+.list-item .info small{display:block; color:#6b6454; font-weight:500; font-size:12px; margin-top:2px; width:100%;}
+.list-item .btn-row{display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-end; flex:0 0 auto; margin-left:auto;}
+.icon-btn{background:none; border:none; cursor:pointer; font-size:16px; padding:9px 10px; min-width:40px; min-height:40px; margin:2px 1px; border-radius:9px; display:inline-flex; align-items:center; justify-content:center; gap:4px; -webkit-tap-highlight-color:transparent; transition:background 0.12s ease; flex-shrink:0;}
+.icon-btn:active{background:rgba(16,32,43,0.08);}
+.result-row{display:flex; gap:8px; margin-top:10px; align-items:center;}
+.result-row input{width:60px; text-align:center;}
+.result-tag{font-size:12px; font-weight:700; padding:4px 8px; border-radius:6px; display:inline-block;}
+.result-tag.done{background:#dff2e6; color:#2E7D4F;}
+.result-tag.pending{background:#fdeeda; color:#b5651d;}
+.result-tag.canceled{background:rgba(214,69,69,0.15); color:var(--red-card);}
+.status-tag{font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; text-transform:uppercase;}
+.status-tag.actual{background:#dff2e6; color:#2E7D4F;}
+.status-tag.proximamente{background:#fdeeda; color:#b5651d;}
+.status-tag.finalizada{background:#eee; color:#888;}
+.star-tag{background:#fdf1cf; color:#a5760b; font-size:11px; font-weight:800; padding:3px 8px; border-radius:6px;}
+.status-tag.free-tag{background:#e6f4ea; color:#1f7a3d;}
+.status-tag.archived-tag{background:#e8e2d5; color:#6b5a3a;}
+.edit-match-box{border-top:1px dashed #d8d3c3; margin-top:12px; padding-top:12px; display:none;}
+.edit-match-box.show{display:block;}
+.pay-badge{border:none; font-size:11px; font-weight:800; padding:4px 9px; border-radius:20px; cursor:pointer; text-transform:uppercase; letter-spacing:0.3px;}
+.pay-badge.paid{background:#dff2e6; color:#2E7D4F;}
+.pay-badge.pending{background:#fdeeda; color:#b5651d;}
+.ref-tag{font-size:11px; color:#6b6454; font-weight:600;}
+
+.pred-table{width:100%; border-collapse:separate; border-spacing:0; margin-top:10px; font-size:14px; border-radius:12px; overflow:hidden; border:1px solid #e5e1d2;}
+.pred-table th{text-align:left; padding:10px 10px; background:var(--pitch); color:var(--chalk); font-size:11px; text-transform:uppercase; letter-spacing:0.5px;}
+.pred-table td{text-align:left; padding:10px; border-bottom:1px solid #ece8da;}
+.pred-table tr:last-child td{border-bottom:none;}
+.pred-table tr:nth-child(even) td{background:#f4f1e6;}
+.pred-table td.pts{font-weight:800; color:var(--pitch);}
+.pred-table td.pts.max{color:#c9860b;}
+/* 🎁 Tabla acumulada del año: clasificados (verde) / fuera de clasificación (rojo)
+   al Concurso Gratuito de Fin de Año — colores tenues para no saturar la tabla. */
+.pred-table tr.row-qualified td{background:rgba(46,160,90,0.12);}
+.pred-table tr.row-not-qualified td{background:rgba(214,69,69,0.10);}
+.rank-move{font-weight:800; margin-right:4px;}
+.rank-move.up{color:#2E7D4F;}
+.rank-move.down{color:#C23636;}
+.badges-btn{background:#efece1; border:none; border-radius:20px; font-size:10.5px; font-weight:700; padding:3px 8px; cursor:pointer; color:#5a6b63; margin-left:4px;}
+
+/* MVP PATCH PEAGADO AL NOMBRE */
+.mvp-patch{
+  display:inline-flex; align-items:center; gap:3px; background:linear-gradient(135deg,#fdf1cf,#f8e2a8);
+  border:1px solid #e0b23f; color:#8a5f0b; font-size:10.5px; font-weight:800; padding:2px 7px;
+  border-radius:20px; margin-left:6px; white-space:nowrap;
+}
+
+.pin-box{text-align:center; padding:10px 0 0;}
+.pin-box input{text-align:center; letter-spacing:6px; font-size:22px;}
+.pin-box .pin-input-wrap{position:relative;}
+.pin-box .pin-input-wrap input{width:100%; padding-right:44px;}
+.pin-box .pin-toggle{position:absolute; right:6px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:18px; padding:8px; line-height:1; color:#5a6b63; -webkit-tap-highlight-color:transparent;}
+
+.prizes-list{display:flex; flex-direction:column; gap:12px; margin-top:6px;}
+.prize-row{display:flex; align-items:center; gap:14px; background:#f4f1e6; border-radius:12px; padding:14px;}
+.prize-medal{font-size:32px;}
+.prize-text{font-size:14px; font-weight:600; color:var(--ink);}
+.prize-place{font-size:11px; color:#6b6454; text-transform:uppercase; letter-spacing:1px; font-weight:700;}
+.ganadores-list{display:flex; flex-direction:column; gap:10px; margin-top:10px;}
+.ganador-row{display:flex; align-items:center; gap:12px; background:#f4f1e6; border-radius:12px; padding:12px 14px;}
+.ganador-row.top1{background:linear-gradient(135deg, rgba(242,193,78,0.35), rgba(242,193,78,0.12)); border:1px solid rgba(242,193,78,0.5);}
+.ganador-rank{width:24px; flex-shrink:0; text-align:center; font-size:13px; font-weight:800; color:#a19a86;}
+.ganador-row.top1 .ganador-rank{color:#a1740a;}
+.ganador-name{flex:1; font-size:14.5px; font-weight:700; color:var(--ink); min-width:0; word-break:break-word;}
+.ganador-count{display:flex; align-items:center; gap:5px; font-size:13.5px; font-weight:800; color:#8a6d1f; background:rgba(242,193,78,0.28); padding:6px 10px; border-radius:999px; white-space:nowrap; flex-shrink:0;}
+
+.rules-content{font-size:14px; line-height:1.7; color:var(--ink);}
+.rules-content h3{margin-top:20px;}
+.rules-content ul{padding-left:18px; margin:8px 0;}
+.rules-content .cost{margin-top:14px; font-weight:800; color:var(--pitch); font-size:15px;}
+.rules-content .sign{margin-top:18px; font-style:italic; color:#6b6454;}
+.rules-content .example-box{background:#f4f1e6; border-radius:12px; padding:12px 14px; margin:10px 0; font-size:13.5px;}
+.rules-content .example-box b{color:var(--pitch);}
+.score-demo{display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--ink); border-radius:12px; padding:14px 12px; margin:8px 0 4px;}
+.score-demo .team{flex:1; text-align:center; color:var(--chalk); font-weight:800; font-size:13px;}
+.score-demo .mid{text-align:center;}
+.score-demo .mid .minute{color:var(--red-card); font-weight:800; font-size:15px;}
+.score-demo .mid .score{color:var(--chalk); font-weight:800; font-size:22px; margin:2px 0;}
+.score-demo .mid .final{display:inline-block; background:var(--floodlight); color:var(--ink); font-weight:800; font-size:12px; border-radius:20px; padding:3px 12px; margin-top:2px;}
+.score-ex{border-radius:12px; padding:12px 14px; margin:10px 0; background:#f4f1e6; border-left:5px solid rgba(22,52,42,0.25);}
+.score-ex.pts5{border-left-color:var(--green-up); background:rgba(76,175,109,0.12);}
+.score-ex.pts3, .score-ex.pts4{border-left-color:var(--floodlight); background:rgba(242,193,78,0.14);}
+.score-ex.pts2{border-left-color:#8a6fd8; background:rgba(138,111,216,0.12);}
+.score-ex.pts1{border-left-color:rgba(22,52,42,0.25); background:#f4f1e6;}
+.score-ex .ex-title{color:var(--pitch); font-weight:800; font-size:12.5px; margin-bottom:6px;}
+.score-ex .ex-row{display:flex; align-items:center; justify-content:center; gap:14px; margin:6px 0;}
+.score-ex .ex-row .label{color:rgba(16,32,43,0.55); font-size:11px; min-width:52px;}
+.score-ex .ex-row .score{color:var(--ink); font-weight:800; font-size:20px;}
+.score-ex .ex-pts{text-align:center; margin-top:6px;}
+.score-ex .ex-pts b{display:inline-block; background:var(--pitch); color:var(--chalk); font-weight:800; font-size:12px; border-radius:20px; padding:3px 12px;}
+.score-ex .ex-note{color:rgba(16,32,43,0.75); font-size:12.5px; margin-top:6px; text-align:center;}
+
+.archived-item{border:1px solid #e0dccc; border-radius:12px; padding:14px; margin-top:10px; cursor:pointer; display:flex; justify-between; align-items:center;}
+.archived-item:active{background:#f4f1e6;}
+
+.confetti-piece{position:fixed; top:-20px; z-index:200; pointer-events:none; border-radius:2px;}
+@keyframes confettiFall{to{transform:translateY(110vh) rotate(540deg); opacity:0.3;}}
+
+.global-loader{
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%);
+  background:rgba(16,32,43,0.92); color:var(--chalk); padding:10px 18px; border-radius:24px;
+  font-size:13px; font-weight:700; display:flex; align-items:center; gap:9px; z-index:300;
+  box-shadow:0 8px 24px rgba(0,0,0,0.4); border:1px solid rgba(242,193,78,0.3);
+  animation:overlayFade 0.15s ease;
+}
+.global-loader-dot{
+  width:9px; height:9px; border-radius:50%; background:var(--floodlight);
+  animation:loaderPulse 0.9s ease-in-out infinite;
+}
+@keyframes loaderPulse{0%,100%{transform:scale(0.7); opacity:0.6;}50%{transform:scale(1.15); opacity:1;}}
+
+@media (min-width: 700px){
+  body{padding-bottom:80px;}
+  .wrap{max-width:600px; padding:0 24px;}
+  .modal{max-width:560px;}
+  .polla-card:hover{transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,0.45);}
+  .check-btn:hover, .submit-btn:not(:disabled):hover, .btn-primary:hover, .btn-secondary:hover, .btn-whatsapp:hover{filter:brightness(1.08); transition:filter 0.15s;}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="goldEggGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="55%" stop-color="#F2C14E"/>
+      <stop offset="100%" stop-color="#C9860B"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div id="globalLoader" class="global-loader hidden"><span class="global-loader-dot"></span>Cargando...</div>
+
+<!-- ======= PANTALLA PRINCIPAL ======= -->
+<div id="landingScreen" class="wrap">
+  <div class="hero">
+    <div class="mascot-wrap"><img src="mascota-gallo.png" alt="Mascota La Polla TICO"></div>
+    <h1>La Polla "TICO"</h1>
+    <p class="slogan">⚽ Nos divertimos y ganamos 🏆</p>
+  </div>
+
+  <div id="pollasContainer"></div>
+
+  <div class="landing-links">
+    <button onclick="openOverlay('rulesOverlay')">📖 Bases</button>
+    <button onclick="openYearlyStandings()">📅 Tabla del año</button>
+    <button onclick="openArchivedPollas()">🕓 Anteriores</button>
+  </div>
+  <div class="landing-links">
+    <button onclick="window.open(TUTORIAL_VIDEO_URL, '_blank')">▶️ ¿Cómo jugar?</button>
+    <button onclick="openQR(siteUrl(), 'La Polla &quot;TICO&quot;')">📱 QR</button>
+    <button onclick="openHallOfFame()">🏆 Ganadores</button>
+  </div>
+  <div class="landing-links">
+    <button id="installAppBtn" class="hidden" onclick="handleInstallClick()">⬇️ Instalar app</button>
+  </div>
+
+  <div class="contact-admin-row"><button onclick="contactAdmin()">💬 Contactar al administrador</button></div>
+  <div class="admin-link"><button onclick="openAdminGate()">Administrar</button></div>
+</div>
+
+<!-- ======= APP DE LA POLLA ======= -->
+<div id="appScreen" class="wrap hidden">
+  <header>
+    <div class="header-topbar">
+      <button class="back-btn" onclick="goToLanding()">‹ Inicio</button>
+      <button class="admin-ball-btn" onclick="openAdmin()" title="Administrar">⚽</button>
+    </div>
+    <div class="eyebrow">Torneo de pronósticos</div>
+    <h1 id="pollaTitle">La Polla "TICO"</h1>
+    <p class="subtitle">Marca el resultado antes de que cierre el partido</p>
+  </header>
+
+  <div class="tools-row">
+    <button onclick="openStandings()">🏆 Tabla</button>
+    <button onclick="openOverlay('prizesOverlay')">🎖️ Premios</button>
+    <button onclick="openOverlay('rulesOverlay')">📖 Bases</button>
+  </div>
+  <div class="winners-row" id="winnersRow">
+    <button id="winnersToolBtn" class="hidden" onclick="showWinners(currentPolla.id)">🥇 Ver Ganadores</button>
+  </div>
+
+  <div class="name-card">
+    <label for="playerName">Tú eres</label>
+    <div class="name-field" id="nameField"><input id="playerName" type="text" placeholder="Tu nombre" autocomplete="off"></div>
+    <button class="check-btn" onclick="checkName()" title="Confirmar">✓</button>
+  </div>
+  <div class="name-status" id="nameStatus"></div><span id="streakBadge" class="streak-badge hidden"></span>
+  <div class="pay-pending-banner hidden" id="payPendingBanner">⏳ Tienes un pago pendiente para esta Polla.</div>
+  <button class="hidden" id="registerAnywayBtn" onclick="offerRegisterAsNewPerson()" style="display:block; margin:0 auto 14px; background:none; border:none; color:var(--floodlight); font-size:12.5px; font-weight:700; text-decoration:underline; cursor:pointer;">
+    📝 ¿Ese nombre ya lo usa otra persona? Regístrate con otro nombre
+  </button>
+  <div class="pin-locked-box hidden" id="pinLockedBox">
+    <b>🚫 Demasiados intentos</b>
+    Comunícate con el administrador de la Polla para que te reinicie tu PIN.
+    <button onclick="retryAfterLock()">Ya lo solucioné, intentar de nuevo</button>
+  </div>
+
+  <div class="invite-row hidden" id="inviteRow"><button onclick="inviteFriends()">🎁 Invitar amigos</button></div>
+  <div class="invite-row hidden" id="setSecurityAnswerBtn"><button onclick="askForSecurityAnswer(authedName, authedPin)">🔑 Configurar recuperación de PIN</button></div>
+
+  <div class="bulk-toggle-row hidden" id="bulkToggleRow">
+    <label class="bulk-toggle">
+      <input type="checkbox" id="bulkModeCheckbox" onchange="toggleBulkMode()">
+      📦 Activar envío masivo por casillas
+    </label>
+  </div>
+
+  <div id="matchesContainer"></div>
+  <div class="mini-leaderboard hidden" id="miniLeaderboard"></div>
+
+  <div class="bulk-bar hidden" id="bulkBar">
+    <button class="submit-btn" id="bulkSendBtn" onclick="sendAllPredictions()">📤 Enviar los pronósticos seleccionados</button>
+  </div>
+
+  <div class="contact-admin-row"><button onclick="contactAdmin()">💬 Contactar al administrador</button></div>
+</div>
+
+<!-- ======= ADMIN GATE ======= -->
+<div class="overlay" id="adminGateOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('adminGateOverlay')">✕</button>
+    <div class="modal-icon">🔐</div><h2>Acceso Admin</h2>
+    <div class="pin-box"><label>Clave</label>
+      <div class="pin-input-wrap">
+        <input id="gatePinInput" type="password" maxlength="40" placeholder="Clave de administrador">
+        <button type="button" class="pin-toggle" id="gatePinToggle" title="Mostrar/ocultar clave" onclick="toggleGatePinVisibility()">👁️</button>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="checkGatePin()">Entrar</button>
+  </div>
+</div>
+
+<!-- ======= ADMIN: POLLAS ======= -->
+<div class="overlay" id="pollasAdminOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('pollasAdminOverlay')">✕</button>
+    <h2>🏈 Administrar Pollas</h2>
+    <h3 style="margin-top:6px;">Nueva Polla</h3>
+    <div class="row2">
+      <div><label>Número</label><input id="newPollaNumber" type="text" placeholder="Ej. 12"></div>
+      <div><label>Estado</label>
+        <select id="newPollaStatus"><option value="actual">Activa</option><option value="proximamente">Próximamente</option></select>
+      </div>
+    </div>
+    <label>Total de partidos programados (meta)</label>
+    <input id="newPollaTotalMatches" type="number" placeholder="Ej. 40">
+    <label>Fecha y hora de inicio</label>
+    <input id="newPollaStartDate" type="datetime-local">
+    <label>Imagen / logo de la competición (opcional)</label>
+    <input id="newPollaImage" type="file" accept="image/*">
+    <div class="checkbox-row"><input id="newPollaIsFree" type="checkbox"><label for="newPollaIsFree" style="margin:0;">🎁 Polla gratuita de fin de año (solo se pueden inscribir los clasificados)</label></div>
+    <p class="hint">Se valida en vivo contra la Tabla Acumulada del Año en el momento en que cada quien intente inscribirse, no depende de cerrar temporada.</p>
+    <button class="btn-primary" onclick="addPolla()">Crear Polla</button>
+    <button class="btn-secondary" onclick="clearNewPollaForm()">✕ Cancelar / limpiar</button>
+
+    <h3>🏁 Cierre de temporada</h3>
+    <div id="seasonInfoBox" class="pozo-box"></div>
+    <button class="btn-secondary" onclick="closeSeason()">🏁 Cerrar Temporada</button>
+    <button class="btn-secondary" onclick="clearSeasonData()">🧹 Vaciar temporada (rework total)</button>
+    <p class="hint">Usa esto DESPUÉS de "Cerrar Temporada": borra TODAS las Pollas ya finalizadas (archivadas o no, con sus partidos/pronósticos/participantes) y vacía la Tabla Acumulada. Jugadores (con sus PINs) y Ganadores nunca se tocan. Bloqueado si nunca has cerrado una temporada.</p>
+
+    <h3>Todas las Pollas</h3>
+    <div id="pollasAdminList"></div>
+  </div>
+</div>
+
+<!-- ======= ADMIN: DENTRO DE UNA POLLA ======= -->
+<div class="overlay" id="adminOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('adminOverlay')">✕</button>
+    <h2 id="adminModalTitle">Administrar</h2>
+    <button class="btn-whatsapp" onclick="sharePollaWhatsApp()">📲 Compartir esta Polla por WhatsApp</button>
+
+    <div class="admin-tabs">
+      <button class="active" data-tab="tabParticipantes" onclick="switchAdminTab('tabParticipantes')">Participantes</button>
+      <button data-tab="tabPartidos" onclick="switchAdminTab('tabPartidos')">Partidos</button>
+      <button data-tab="tabPremios" onclick="switchAdminTab('tabPremios')">Premios</button>
+      <button data-tab="tabDatos" onclick="switchAdminTab('tabDatos')">Datos</button>
+    </div>
+
+    <div class="admin-pane active" id="tabParticipantes">
+      <div class="archived-lock">
+        <label>Agregar participantes (uno por línea)</label>
+        <textarea id="participantsInput" placeholder="Imanol&#10;Juan Pérez&#10;María López"></textarea>
+        <button class="btn-secondary" onclick="addParticipants()">Agregar a la lista</button>
+        <button class="btn-whatsapp" style="margin-top:10px; margin-bottom:0;" onclick="sendRecruitmentReminder()">📢 Avisar cuántos ya se inscribieron</button>
+        <button class="btn-whatsapp" style="margin-top:8px; margin-bottom:0;" onclick="sendTimeReminder()">⏳ Avisar cuánto falta para el inicio</button>
+      </div>
+      <h3>Participantes activos</h3>
+      <div id="participantsList"></div>
+    </div>
+
+    <div class="admin-pane" id="tabPartidos">
+      <div class="archived-lock">
+        <h3 style="margin-top:6px;">Nuevo partido</h3>
+        <label>Número de partido</label>
+        <input id="newMatchNumber" type="text" placeholder="Ej. 1">
+        <div class="row2">
+          <div><label>Equipo local</label><input id="newHome" type="text" placeholder="Ej. Perú"></div>
+          <div><label>Equipo visitante</label><input id="newAway" type="text" placeholder="Ej. Chile"></div>
+        </div>
+        <label>Captura del partido</label>
+        <input id="newImage" type="file" accept="image/*">
+        <label>Cierra pronósticos el</label>
+        <input id="newClose" type="datetime-local">
+        <div class="checkbox-row"><input id="newIsStar" type="checkbox"><label for="newIsStar" style="margin:0;">⭐ Partido estrella (duplica los puntos)</label></div>
+        <button class="btn-primary" id="addMatchBtn" onclick="addMatch()">Agregar partido</button>
+        <button class="btn-secondary" onclick="clearNewMatchForm()">✕ Cancelar / limpiar</button>
+      </div>
+      <h3>Partidos de esta Polla</h3>
+      <button class="btn-secondary" onclick="exportAllCSV()">⬇️ Exportar pronósticos (.csv)</button>
+      <div id="adminMatchList"></div>
+    </div>
+
+    <div class="admin-pane" id="tabPremios">
+      <div id="pozoBox" class="pozo-box"></div>
+      <div id="freeContestBox" class="pozo-box"></div>
+      <button class="btn-whatsapp" onclick="inviteFreeContestQualifiers()">📲 Invitar a los clasificados a la Polla gratis</button>
+      <div class="archived-lock">
+        <label>🥇 Primer premio</label><input id="premio1Input" type="text" placeholder="Ej. S/300 en efectivo">
+        <label>🥈 Segundo premio</label><input id="premio2Input" type="text" placeholder="Ej. Jugada gratis siguiente Polla">
+        <label>🥉 Tercer premio</label><input id="premio3Input" type="text" placeholder="Ej. 50% de descuento siguiente Polla">
+        <button class="btn-primary" onclick="savePremios()">Guardar premios</button>
+        <h3>Estado de la Polla</h3>
+        <p class="hint">Al marcarla como finalizada, se calcula el podio final y se archiva automáticamente.</p>
+        <button class="btn-secondary" onclick="finalizePolla()">🏁 Finalizar esta Polla</button>
+        <div class="checkbox-row" style="margin-top:14px;"><input id="showWinnersLiveToggle" type="checkbox" onchange="toggleShowWinnersLive(this.checked)"><label for="showWinnersLiveToggle" style="margin:0;">🏆 Mostrar botón de Ganadores ya (con la tabla actual, sin esperar a finalizar)</label></div>
+      </div>
+      <div id="archivedPremiosFix" style="display:none; margin-top:10px;">
+        <button class="btn-secondary" onclick="toggleArchivedPremiosForm_()">✏️ Corregir premios</button>
+        <div id="archivedPremiosForm" style="display:none; margin-top:10px;">
+          <label>🥇 Primer premio</label><input id="premio1FixInput" type="text" placeholder="Ej. S/300 en efectivo">
+          <label>🥈 Segundo premio</label><input id="premio2FixInput" type="text" placeholder="Ej. Jugada gratis siguiente Polla">
+          <label>🥉 Tercer premio</label><input id="premio3FixInput" type="text" placeholder="Ej. 50% de descuento siguiente Polla">
+          <button class="btn-primary" onclick="saveArchivedPremiosFix_()">Guardar corrección</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-pane" id="tabDatos">
+      <h3 style="margin-top:6px;">Respaldo completo</h3>
+      <p class="hint">Descarga todos los datos de esta Polla (partidos, pronósticos, participantes) en un solo archivo.</p>
+      <button class="btn-secondary" onclick="exportPollaBackup()">⬇️ Exportar respaldo completo (.json)</button>
+      <h3>Respaldo global (identidades e historial)</h3>
+      <p class="hint">Descarga las hojas que viven para siempre y nunca se borran: identidades de jugadores (nombre, PIN, pregunta de seguridad), historial de campeones y el arrastre de puntos entre años. Si el Sheet se corrompe o alguien borra algo por error, esto es lo que te permite reconstruirlo.</p>
+      <button class="btn-secondary" onclick="exportGlobalBackup()">⬇️ Exportar respaldo global (.json)</button>
+      <h3>Historial de cambios</h3>
+      <p class="hint">Quién hizo cada cambio administrativo y cuándo (últimos 300 registros, más reciente primero).</p>
+      <button class="btn-secondary" onclick="loadAdminLog()">🕓 Ver historial de cambios</button>
+      <div id="adminLogList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= MODAL CANCELAR Y REEMPLAZAR PARTIDO ======= -->
+<div class="overlay" id="cancelMatchOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('cancelMatchOverlay')">✕</button>
+    <div class="modal-icon">🚫</div>
+    <h2>Cancelar y Reemplazar Partido</h2>
+    <input type="hidden" id="cancelMatchTargetId">
+    
+    <label>Motivo de cancelación (ej. Emergencia climatológica)</label>
+    <input id="cancelReasonInput" type="text" placeholder="Ej. Suspendido por fuertes lluvias / emergencia climatológica">
+
+    <h3 style="margin-top:16px;">Datos del Partido de Reemplazo</h3>
+    <p class="hint">El nuevo partido mantendrá el orden para reemplazo inmediato.</p>
+    <div class="row2">
+      <div><label>Equipo local</label><input id="reemplazoHome" type="text" placeholder="Ej. Perú"></div>
+      <div><label>Equipo visitante</label><input id="reemplazoAway" type="text" placeholder="Ej. Colombia"></div>
+    </div>
+    <label>Captura del partido reemplazo</label>
+    <input id="reemplazoImage" type="file" accept="image/*">
+    <label>Cierra pronósticos el</label>
+    <input id="reemplazoClose" type="datetime-local">
+    <div class="checkbox-row"><input id="reemplazoIsStar" type="checkbox"><label for="reemplazoIsStar" style="margin:0;">⭐ Partido estrella</label></div>
+
+    <button class="btn-primary" id="confirmCancelBtn" onclick="confirmCancelAndReplace()">Confirmar Cancelación y Reemplazo</button>
+  </div>
+</div>
+
+<!-- ======= RESULTADOS DE PARTIDO ======= -->
+<div class="overlay" id="resultsOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('resultsOverlay')">✕</button>
+    <div class="modal-icon">📋</div><h2 id="resultsTitle">Pronósticos</h2>
+    <table class="pred-table" id="resultsTable"></table>
+  </div>
+</div>
+
+<!-- ======= TABLA GENERAL ======= -->
+<div class="overlay" id="standingsOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('standingsOverlay')">✕</button>
+    <div class="modal-icon">🏆</div><h2>Tabla General</h2>
+    <table class="pred-table" id="standingsTable"></table>
+  </div>
+</div>
+
+<!-- ======= TABLA DEL AÑO ======= -->
+<div class="overlay" id="yearlyOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('yearlyOverlay')">✕</button>
+    <div class="modal-icon">📅</div><h2>Tabla Acumulada del Año</h2>
+    <p class="hint">Suma los puntos de todas las Pollas jugadas. <span style="color:#2ea05a; font-weight:700;">Verde</span> = clasificado al concurso gratis de fin de año · <span style="color:#c0392b; font-weight:700;">Rojo</span> = fuera de la clasificación por ahora.</p>
+    <table class="pred-table" id="yearlyTable"></table>
+  </div>
+</div>
+
+<!-- ======= PREMIOS ======= -->
+<div class="overlay" id="prizesOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('prizesOverlay')">✕</button>
+    <div class="modal-icon">🎖️</div><h2>Premios de esta Polla</h2>
+    <div class="prizes-list" id="prizesList"></div>
+  </div>
+</div>
+
+<!-- ======= GANADORES ======= -->
+<div class="overlay" id="winnersOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('winnersOverlay')">✕</button>
+    <div class="modal-icon">🏆</div><h2 id="winnersTitle">Ganadores</h2>
+    <div class="prizes-list" id="winnersList"></div>
+  </div>
+</div>
+
+<!-- ======= GANADORES DE LA POLLA (HISTÓRICO, DE TODOS LOS TIEMPOS) ======= -->
+<div class="overlay" id="hallOfFameOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('hallOfFameOverlay')">✕</button>
+    <div class="modal-icon">🏆</div><h2>Ganadores de la Polla</h2>
+    <p class="hint" style="text-align:center; margin-top:-4px;">Cuántas veces campeonó cada quien, de todos los tiempos.</p>
+    <div class="ganadores-list" id="hallOfFameList"></div>
+  </div>
+</div>
+
+<!-- ======= INSIGNIAS ======= -->
+<div class="overlay" id="badgesOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('badgesOverlay')">✕</button>
+    <div class="modal-icon">🏅</div><h2 id="badgesTitle">Insignias</h2>
+    <div class="prizes-list" id="badgesList"></div>
+  </div>
+</div>
+
+<!-- ======= CÓDIGO QR ======= -->
+<div class="overlay" id="qrOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('qrOverlay')">✕</button>
+    <div class="modal-icon">📱</div><h2 id="qrTitle">Código QR</h2>
+    <div class="qr-box" id="qrBox"></div>
+    <p class="hint" style="text-align:center;" id="qrHint"></p>
+    <button class="btn-secondary" onclick="downloadQR()">⬇️ Descargar imagen</button>
+  </div>
+</div>
+
+<!-- ======= BASES DEL CONCURSO ======= -->
+<div class="overlay" id="rulesOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('rulesOverlay')">✕</button>
+    <div class="modal-icon">📖</div><h2>Bases del Concurso</h2>
+    <div class="rules-content">
+      <h3>🙋 Reglas generales</h3>
+      <ul>
+        <li>El participante deberá colocar su score (marcador) en cada partido.</li>
+        <li>Puede jugar la cantidad de Pollas que desee, no hay límite.</li>
+        <li>Puedes actualizar tu pronóstico las veces que quieras, mientras el partido no haya cerrado.</li>
+        <li>En caso de empate entre dos o más participantes, los premios se dividirán en partes iguales.</li>
+        <li>Las inscripciones a una Polla se cierran automáticamente el día en que esta comienza. Regístrate antes.</li>
+      </ul>
+      <p class="cost">💰 Costo de participación: S/ 10.00</p>
+      <div class="example-box">
+        <b>💳 Forma de pago:</b> el pago se coordina directamente con el administrador, Manuel, al número <b>994 339 859</b> (también puedes usar el botón "Contactar al administrador" dentro de la app, que te lleva directo a WhatsApp).<br><br>
+        El participante que NO complete el pago antes del inicio del concurso será borrado por el sistema automáticamente (usuario y pronósticos).
+      </div>
+
+      <h3>🔐 Sobre tu PIN</h3>
+      <p>La primera vez que confirmas tu nombre, en cualquier Polla, el sistema te pide crear un PIN de 4 dígitos. Ese PIN es tuyo para siempre: te sirve en esta Polla y en todas las que juegues después, siempre y cuando uses el mismo nombre. Es personal e intransferible, sirve para que nadie más pueda enviar pronósticos usando tu nombre. No compartas tu PIN con nadie. Si lo olvidas, comunícate con el administrador para que te lo reinicie (el reinicio también aplica para todas tus Pollas).</p>
+      <p>Opcionalmente puedes configurar una <b>palabra secreta</b> (botón "🔑 Configurar recuperación de PIN"): si luego olvidas tu PIN, respondiéndola correctamente lo recuperas tú mismo al instante, sin depender del administrador.</p>
+
+      <h3>⚽ Sistema de puntuación</h3>
+      <ul>
+        <li>🎯 Resultado Exacto: <b>5 puntos</b></li>
+        <li>✅ Resultado Correcto (ganador o empate): <b>2 puntos</b></li>
+        <li>🔢 Goles de cualquiera de los equipos: <b>1 punto</b> por cada equipo acertado</li>
+        <li>📏 Handicap (acertar la diferencia exacta de goles cuando hay un ganador): <b>2 puntos extra</b></li>
+      </ul>
+      <div class="score-ex pts5">
+        <div class="ex-title">🎯 Ejemplo 1 · Resultado exacto</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">1 – 2</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">1 – 2</div></div>
+        <div class="ex-pts"><b>+5 puntos</b></div>
+        <div class="ex-note">Acertaste el marcador exacto. Son 5 puntos fijos, no se suma nada más aparte.</div>
+      </div>
+      <div class="score-ex pts2">
+        <div class="ex-title">✅ Ejemplo 2 · Solo el ganador o empate</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">3 – 1</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">4 – 0</div></div>
+        <div class="ex-pts"><b>+2 puntos</b></div>
+        <div class="ex-note">Acertaste que ganaba el local, pero ningún gol ni la diferencia exacta (4-0 ≠ 3-1).</div>
+      </div>
+      <div class="score-ex pts1">
+        <div class="ex-title">🔢 Ejemplo 3 · Solo un gol acertado</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">1 – 0</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">1 – 2</div></div>
+        <div class="ex-pts"><b>+1 punto</b></div>
+        <div class="ex-note">Acertaste solo el gol del local (+1).</div>
+      </div>
+      <div class="score-ex pts3">
+        <div class="ex-title">🔀 Ejemplo 4 · Combinación: un gol + el ganador</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">0 – 2</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">1 – 2</div></div>
+        <div class="ex-pts"><b>+3 puntos</b></div>
+        <div class="ex-note">Acertaste el gol del visitante (+1) y el ganador (+2).</div>
+      </div>
+      <div class="score-ex pts4">
+        <div class="ex-title">📏 Ejemplo 5 · Combinación: ganador + handicap</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">4 – 2</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">2 – 0</div></div>
+        <div class="ex-pts"><b>+4 puntos</b></div>
+        <div class="ex-note">Acertaste que ganaba el local (+2) y la diferencia de 2 goles (+2 handicap). El handicap no aplica en empates, y solo se puede sumar si primero acertaste el ganador: no existe "solo handicap" por separado.</div>
+      </div>
+
+      <h3>🎁 Bonus por ir contra la mayoría</h3>
+      <p>Si acertaste el Resultado Exacto y menos del 30% también lo acertó, sumas <b>+1 punto extra</b>.</p>
+      <div class="score-ex pts5">
+        <div class="ex-title">🎁 Ejemplo · Bonus contra la mayoría</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">1 – 2</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">1 – 2</div></div>
+        <div class="ex-pts"><b>+6 puntos</b></div>
+        <div class="ex-note">Acertaste el resultado exacto (+5) y menos del 30% de los demás participantes también lo acertó (+1 bonus). Total: 6 puntos.</div>
+      </div>
+
+      <h3>⭐ Partido estrella</h3>
+      <p>El admin puede marcar un partido con borde dorado. Ahí, todos los puntos se duplican.</p>
+      <div class="score-ex pts4">
+        <div class="ex-title">⭐ Ejemplo · Partido estrella</div>
+        <div class="ex-row"><div class="label">Terminó</div><div class="score">1 – 2</div></div>
+        <div class="ex-row"><div class="label">Pusiste</div><div class="score">1 – 2</div></div>
+        <div class="ex-pts"><b>+10 puntos</b></div>
+        <div class="ex-note">Acertaste el resultado exacto, que normalmente vale 5 puntos. Al ser Partido Estrella, se duplica: 10 puntos.</div>
+      </div>
+
+      <h3>🏆 Reconocimientos</h3>
+      <ul>
+        <li>🥇 MVP de la fecha (visible en la tabla de cada partido).</li>
+        <li>🏅 Insignias por logros, junto a tu nombre en las tablas.</li>
+      </ul>
+
+      <h3>📅 Tabla acumulada del año</h3>
+      <p>Suma tus puntos de todas las Pollas que juegues en el año.</p>
+      <div class="example-box">
+        <b>🎁 Concurso gratuito de fin de año:</b> al terminar el año, un Top de la tabla acumulada clasifica a un concurso totalmente gratuito. Ese Top no es un número fijo: es variable, de acuerdo a la cantidad de gente que participe en las Pollas durante la temporada, y se va actualizando mientras más participan.<br><br>
+        En la tabla acumulada, los participantes en <span style="color:#2ea05a; font-weight:800;">verde</span> están siendo clasificados, y los que aparecen en <span style="color:#c0392b; font-weight:800;">rojo</span> están quedando fuera de la clasificación al concurso gratuito (esto se va actualizando según sigas sumando puntos).
+      </div>
+
+      <h3>👥 Sistema de invitados</h3>
+      <ul>
+        <li>1 invitado: <b>S/ 2.00 de descuento</b></li>
+        <li>2 invitados: <b>S/ 5.00 de descuento</b></li>
+        <li>3 invitados: <b>inscripción totalmente gratis</b></li>
+      </ul>
+
+      <h3>⏱️ Otras consideraciones</h3>
+      <div class="example-box">
+        <b>⏱️ Solo cuentan los 90'</b><br><br>
+        <div class="score-demo">
+          <div class="team">🇨🇴<br>Colombia</div>
+          <div class="mid"><div class="minute">🕒 90'</div><div class="score">0 – 0</div><div class="final">3 - 1</div></div>
+          <div class="team">🇵🇹<br>Portugal</div>
+        </div>
+        Todos los pronósticos de los partidos son a 90 minutos (más descuentos), sin contar tiempo suplementario ni penales. En el ejemplo, el marcador que cuenta para tu pronóstico es <b>0-0</b>, aunque el partido haya terminado 3-1 en penales.
+      </div>
+      <ul>
+        <li>Quien no pronostique a tiempo no puede hacerlo tras el cierre, pero sí en el siguiente partido.</li>
+        <li>Si el partido se suspende, se espera 30 minutos; si no se reanuda, se cancela y se reemplaza.</li>
+      </ul>
+
+      <p class="sign">La Administración</p>
+    </div>
+  </div>
+</div>
+
+<!-- ======= POLLAS ANTERIORES ======= -->
+<div class="overlay" id="archivedOverlay">
+  <div class="modal">
+    <button class="close-x" onclick="closeOverlay('archivedOverlay')">✕</button>
+    <div class="modal-icon">🕓</div><h2>Pollas Anteriores</h2>
+    <div id="archivedList"></div>
+  </div>
+</div>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLEtV7KgenwSR5JQ6Y1z_350rA79U08YpeIcAEKUcbkkZKSSjE9ltNdQIYGb94DgxSqA/exec';
+const ADMIN_NAME = "Manuel";
+const ADMIN_PHONE = "51994339859";
+// 👉 Reemplaza esta URL cuando subas el video de "cómo jugar la Polla" a YouTube.
+const TUTORIAL_VIDEO_URL = "https://www.youtube.com/@TU_CANAL_AQUI";
+const PRECIO_POR_PERSONA = 10; // S/10 de inscripción por participante
+const PORCENTAJE_POZO = 0.805; // 80.5% de lo recaudado se reparte como premios
+const FREE_CONTEST_TOP_PERCENT_UI = 0.60; // solo para mostrar el % en el texto del admin; el corte real (con empates en la frontera) lo calcula el servidor
+
+const ICON_PEOPLE = '<svg class="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="8" r="3.3" fill="currentColor"/><path d="M2 20c0-4.2 3.5-6.8 7-6.8s7 2.6 7 6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="17.5" cy="9" r="2.6" fill="currentColor" opacity="0.55"/><path d="M15.5 20c0-3.1 1.9-5.4 4-6.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/></svg>';
+const ICON_BALL = '<svg class="stat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9.3" stroke="currentColor" stroke-width="1.6"/><path d="M12 6.8l4.2 3-1.6 4.9H9.4l-1.6-4.9z" fill="currentColor"/><path d="M12 2.7v4.1M12 17.2v4.1M3 12h4.3M16.7 12H21" stroke="currentColor" stroke-width="1.2" opacity="0.5" stroke-linecap="round"/></svg>';
+const ICON_GOLD_EGG = '<svg width="14" height="14" viewBox="0 0 24 24" style="vertical-align:-2px;"><path d="M12 2C7.8 2 4.5 10 4.5 15a7.5 7.5 0 0015 0C19.5 10 16.2 2 12 2z" fill="url(#goldEggGrad)" stroke="#8a5f0b" stroke-width="0.6"/><ellipse cx="9.3" cy="10.5" rx="1.6" ry="2.4" fill="#fff" opacity="0.45"/></svg>';
+
+// Seguridad: escapa texto antes de inyectarlo vía innerHTML para prevenir XSS
+// (nombres de participantes son ingresados libremente por cualquier visitante).
+function escapeHtml(str){
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+// Misma idea que normalizeName_() del backend (Code.gs): compara nombres
+// ignorando mayúsculas/minúsculas Y tildes, para que "José"/"Jose" siempre
+// se reconozcan como la misma persona también acá en el frontend (si esto
+// no coincidiera con el backend, cosas como "resaltar mi pronóstico" o el
+// caché local tras enviar un pronóstico podían fallar por una tilde de más
+// o de menos).
+function normalizeName(str){
+  return String(str || '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+// Igual que escapeHtml, pero para valores insertados dentro de un atributo
+// onclick="fn('...')": primero escapa para que sea un literal JS seguro
+// (comillas simples, backslashes) y luego escapa el resultado para HTML,
+// evitando tanto el escape del string JS como el del atributo HTML.
+function jsAttr(str){
+  const jsEscaped = String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+  return escapeHtml(jsEscaped);
+}
+
+let allPollas = [];
+let currentPolla = null;
+let matches = [];
+let bulkMode = false;
+let selectedBulkMatches = new Set();
+let collapsedDateGroups = new Set(); // fechas (YYYY-MM-DD) recogidas; se recalcula en cada loadMatches()
+let predictionsCache = {};
+let authedName = null;
+let authedPin = null;
+// PIN de admin verificado por el backend en authAdmin. Se guarda en memoria
+// (nunca en localStorage) y se reenvía en cada acción de admin, porque el
+// backend ahora vuelve a validarlo en cada una — ver ADMIN_ACTIONS_ en Code.gs.
+let adminPin = null;
+// Nombre de quien está administrando en esta sesión (se pregunta una vez al
+// entrar). Se manda junto al PIN en cada acción de admin para que el
+// historial de cambios (HistorialAdmin) diga QUIÉN hizo cada cosa.
+let adminName = null;
+let myReferralCode = null;
+let countdownTimer = null;
+let landingTimer = null;
+let participantsCache = [];
+const busyFlags = {};
+let incomingRefCode = '';
+let incomingPollaId = '';
+let deferredInstallPrompt = null; // evento beforeinstallprompt guardado para disparar la instalación al tocar el botón
+
+function openOverlay(id){ document.getElementById(id).classList.add('show'); }
+function closeOverlay(id){ document.getElementById(id).classList.remove('show'); }
+function fmtCloseTime(iso){
+  const d = new Date(iso);
+  return d.toLocaleString('es-PE', {weekday:'short', day:'numeric', month:'short', hour:'numeric', minute:'2-digit'});
+}
+function fmtDate(iso){
+  if(!iso) return '';
+  const d = new Date(iso + (iso.length <= 10 ? 'T00:00:00' : ''));
+  return d.toLocaleDateString('es-PE', {day:'numeric', month:'long', year:'numeric'});
+}
+// Convierte una fecha guardada (UTC, ej. "2026-08-14T00:30:00.000Z") a la cadena
+// de hora LOCAL que un <input type="datetime-local"> necesita en su "value".
+// Sin esto, precargar el input con el string UTC tal cual hace que se muestre
+// la hora corrida (en Perú, 5 horas adelantada) y que al guardar sin querer
+// se le vuelva a sumar el desfase, corriendo el cierre del partido cada vez
+// que se edita.
+function toLocalInputValue(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  if(isNaN(d.getTime())) return '';
+  const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0,16);
+}
+function dateGroupKey(iso){
+  const d = new Date(iso);
+  // clave interna en la zona horaria local (no UTC), para que un partido de las 11pm
+  // no se cuele en el bloque del día siguiente
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function dateKeyFromDate_(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+// Por defecto solo interesan "hoy" y "mañana": esos vienen desplegados. Todo lo demás
+// (fechas pasadas y fechas más lejanas) arranca recogido para no generar ruido visual.
+// A medida que pasan los días, esto se recalcula solo cada vez que se entra a la Polla.
+function computeDefaultCollapsedGroups(){
+  const today = new Date();
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const todayKey = dateKeyFromDate_(today);
+  const tomorrowKey = dateKeyFromDate_(tomorrow);
+  const collapsed = new Set();
+  const seenKeys = new Set(matches.map(m => dateGroupKey(m.closeAt)));
+  seenKeys.forEach(key => {
+    if(key !== todayKey && key !== tomorrowKey) collapsed.add(key);
+  });
+  return collapsed;
+}
+function fmtDayHeader(iso){
+  const d = new Date(iso);
+  const day = d.getDate();
+  const month = d.toLocaleDateString('es-PE', {month:'short'}).replace('.','').toUpperCase();
+  return `${day} ${month}`;
+}
+function startLabel(dateStr){
+  if(!dateStr) return {text: '', soon: false};
+  const target = new Date(dateStr.length <= 10 ? dateStr + 'T00:00:00' : dateStr);
+  const now = new Date();
+  const diffMs = target - now;
+  if(diffMs <= 0) return {text: `🔒 Inscripciones cerradas`, soon:false};
+  const totalHours = Math.floor(diffMs / 3600000);
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const soon = diffMs < 24 * 3600000;
+  let text;
+  if(days > 0 && hours > 0) text = `📝 Cierre de inscripciones en ${days}d ${hours}h`;
+  else if(days > 0) text = `📝 Cierre de inscripciones en ${days} día${days>1?'s':''}`;
+  else if(hours > 0) text = `📝 Cierre de inscripciones en ${hours}h`;
+  else { const mins = Math.floor(diffMs / 60000); text = `📝 ¡Cierre de inscripciones en ${mins} min!`; }
+  return {text, soon};
+}
+function isClosed(iso){ return new Date() > new Date(iso); }
+function siteUrl(){ return location.origin + location.pathname; }
+function fmtCountdown(iso){
+  const diff = new Date(iso) - new Date();
+  if(diff <= 0) return null;
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  if(h > 24){ const d = Math.floor(h/24); return `Cierra en ${d}d ${h%24}h`; }
+  if(h > 0) return `Cierra en ${h}h ${m}min`;
+  return `Cierra en ${m}min`;
+}
+let activeRequests = 0;
+function showGlobalLoader(){
+  activeRequests++;
+  document.getElementById('globalLoader').classList.remove('hidden');
+}
+function hideGlobalLoader(){
+  activeRequests = Math.max(0, activeRequests - 1);
+  if(activeRequests === 0) document.getElementById('globalLoader').classList.add('hidden');
+}
+// En datos móviles las conexiones son más inestables que en wifi: paquetes perdidos,
+// cambios de antena, cobertura débil. Sin esto, una llamada que se cuelga puede dejar
+// el "Cargando..." pegado para siempre, o un botón trabado en "Enviando...".
+const REQUEST_TIMEOUT_MS = 20000;
+async function fetchWithTimeout_(url, options){
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  try{
+    return await fetch(url, {...(options||{}), signal: controller.signal});
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+async function apiGet(action, params={}, retriesLeft=2){
+  showGlobalLoader();
+  try{
+    const qs = new URLSearchParams({action, ...params}).toString();
+    const res = await fetchWithTimeout_(`${APPS_SCRIPT_URL}?${qs}`);
+    return await res.json();
+  } catch(err){
+    // Falla de red o se demoró demasiado: como un GET no cambia nada en el servidor,
+    // es seguro reintentar un par de veces antes de rendirnos.
+    if(retriesLeft > 0){
+      await new Promise(r => setTimeout(r, 700));
+      return apiGet(action, params, retriesLeft - 1);
+    }
+    throw err;
+  } finally { hideGlobalLoader(); }
+}
+async function apiPost(params, retriesLeft=2){
+  showGlobalLoader();
+  try{
+    const body = new URLSearchParams(params);
+    const res = await fetchWithTimeout_(APPS_SCRIPT_URL, {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body.toString()});
+    const result = await res.json();
+    // Si el servidor estaba ocupado (muchas personas enviando a la vez), la operación
+    // NUNCA llegó a ejecutarse — es seguro reintentar solo, sin molestar al usuario.
+    // Hasta 2 reintentos (antes era solo 1), con una espera un poco mayor cada vez,
+    // para aguantar mejor los picos justo antes de que cierre un partido.
+    if(result && !result.ok && retriesLeft > 0 && result.error && String(result.error).toLowerCase().indexOf('ocupado') !== -1){
+      await new Promise(r => setTimeout(r, 900 * (3 - retriesLeft)));
+      return apiPost(params, retriesLeft - 1);
+    }
+    return result;
+  } catch(err){
+    // Falla de red real (sin conexión, se cayó a mitad de camino, tardó demasiado).
+    // Devolvemos un objeto de error normal en vez de dejar que la excepción rompa el
+    // flujo — así los botones no quedan trabados en "Enviando..." para siempre.
+    return {ok:false, error:'Sin conexión con el servidor. Revisa tu internet e inténtalo de nuevo.'};
+  } finally { hideGlobalLoader(); }
+}
+function contactAdmin(){
+  const pollaRef = currentPolla ? ` # ${currentPolla.number}` : '';
+  let text;
+  if(authedName){
+    text = `👋 Hola ${ADMIN_NAME}, te escribo por la Polla "TICO"${pollaRef}.\n\n✅ Ya estoy inscrito como: ${authedName}\n📋 Quiero finalizar mi proceso de inscripción.`;
+  } else {
+    text = `👋 Hola ${ADMIN_NAME}, te escribo por la Polla "TICO"${pollaRef}.\n\n📝 ¿Me puedes brindar los pasos para inscribirme?`;
+  }
+  window.open(`https://wa.me/${ADMIN_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
+}
+
+/* ============ DEDUPLICACIÓN Y ORDENAMIENTO DE PARTIDOS (PARTIDO RECIENTE ARRIBA / PARTIDO 1 ABAJO) ============ */
+function getSortedMatches(){
+  const map = new Map();
+  matches.forEach(m => map.set(m.id, m));
+  const list = Array.from(map.values());
+
+  // Orden descendente por número de partido (Partidos recientes arriba, Partido 1 abajo)
+  list.sort((a,b) => {
+    const numA = parseFloat(a.matchNumber) || 0;
+    const numB = parseFloat(b.matchNumber) || 0;
+    if(numA !== numB) return numB - numA;
+    if(!a.isCanceled && b.isCanceled) return -1;
+    if(a.isCanceled && !b.isCanceled) return 1;
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
+  return list;
+}
+
+/* ============ CASILLAS DE MARCADOR Y ENVÍO MASIVO ============ */
+function toggleBulkMode(){
+  bulkMode = document.getElementById('bulkModeCheckbox').checked;
+  if(bulkMode){
+    const openMatches = getSortedMatches().filter(m => !m.resultSubmitted && !m.isCanceled && !isClosed(m.closeAt));
+    selectedBulkMatches = new Set(openMatches.map(m => m.id));
+  } else {
+    selectedBulkMatches.clear();
+  }
+  renderMatches();
+}
+
+function toggleMatchBulkSelect(matchId, isChecked){
+  if(isChecked){
+    selectedBulkMatches.add(matchId);
+  } else {
+    selectedBulkMatches.delete(matchId);
+  }
+  const labelText = document.getElementById(`bulk-text-${matchId}`);
+  if(labelText){
+    labelText.textContent = isChecked ? '✅ Incluido para envío masivo' : '⬜ Omitir este partido';
+  }
+  updateBulkBar();
+}
+
+function updateBulkBar(){
+  const bar = document.getElementById('bulkBar');
+  if(!bar) return;
+  const openMatches = getSortedMatches().filter(m => !m.resultSubmitted && !m.isCanceled && !isClosed(m.closeAt));
+  const count = openMatches.filter(m => selectedBulkMatches.has(m.id)).length;
+
+  if(bulkMode && authedName && openMatches.length > 0){
+    bar.classList.remove('hidden');
+    const btn = document.getElementById('bulkSendBtn');
+    if(count > 0){
+      btn.disabled = false;
+      btn.textContent = `📤 Enviar los ${count} pronósticos seleccionados`;
+    } else {
+      btn.disabled = true;
+      btn.textContent = `⚠️ Selecciona al menos 1 casilla de partido`;
+    }
+  } else {
+    bar.classList.add('hidden');
+  }
+}
+
+async function sendAllPredictions(){
+  if(!authedName) return;
+  const selectedMatches = getSortedMatches().filter(m => !m.resultSubmitted && !m.isCanceled && !isClosed(m.closeAt) && selectedBulkMatches.has(m.id));
+  if(selectedMatches.length === 0){
+    alert('Selecciona al menos una casilla de partido para enviar.');
+    return;
+  }
+
+  const btn = document.getElementById('bulkSendBtn');
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  let sent = 0, failed = 0;
+
+  for(const m of selectedMatches){
+    const homeEl = document.getElementById(`score-${m.id}-home`);
+    const awayEl = document.getElementById(`score-${m.id}-away`);
+    if(!homeEl || !awayEl) continue;
+    
+    const home = parseInt(homeEl.value !== '' ? homeEl.value : 0);
+    const away = parseInt(awayEl.value !== '' ? awayEl.value : 0);
+    
+    btn.textContent = `Enviando ${sent + failed + 1} de ${selectedMatches.length}...`;
+    try{
+      const result = await apiPost({action:'savePrediction', matchId: m.id, name: authedName, home, away, pin: authedPin});
+      if(result.ok){ sent++; updateLocalPrediction(m.id, authedName, home, away); } else { failed++; }
+    } catch(err){ failed++; }
+  }
+
+  btn.disabled = false;
+  btn.textContent = originalText;
+  await renderMatches();
+
+  if(failed === 0) alert(`✅ ¡Listo! Se enviaron correctamente tus ${sent} pronósticos.`);
+  else alert(`Se enviaron ${sent} pronósticos, pero ${failed} tuvieron un problema. Revisa e inténtalo de nuevo.`);
+}
+
+/* ============ LINK CON PARÁMETROS ============ */
+(function readUrlParams(){
+  const params = new URLSearchParams(location.search);
+  incomingPollaId = params.get('polla') || '';
+  incomingRefCode = (params.get('ref') || '').toUpperCase();
+})();
+
+/* ============ CONFETI ============ */
+function launchConfetti(){
+  const colors = ['#F2C14E','#D64545','#2E86AB','#4CAF6D','#F6F3EA'];
+  for(let i=0; i<40; i++){
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    const size = 6 + Math.random()*6;
+    piece.style.width = size+'px'; piece.style.height = (size*1.6)+'px';
+    piece.style.left = (Math.random()*100)+'vw';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animation = `confettiFall ${1.8+Math.random()*1.4}s ease-in forwards`;
+    piece.style.animationDelay = (Math.random()*0.4)+'s';
+    document.body.appendChild(piece);
+    setTimeout(()=>piece.remove(), 3600);
+  }
+}
+
+/* ============ QR ============ */
+function openQR(url, title, hint){
+  document.getElementById('qrTitle').textContent = title || 'Código QR';
+  document.getElementById('qrHint').textContent = hint || url;
+  const box = document.getElementById('qrBox');
+  box.innerHTML = '';
+  new QRCode(box, {text: url, width: 220, height: 220, colorDark:'#10202B', colorLight:'#ffffff'});
+  openOverlay('qrOverlay');
+}
+async function downloadQR(){
+  const box = document.getElementById('qrBox');
+  const src = box.querySelector('canvas') || box.querySelector('img');
+  if(!src){ alert('No se pudo generar la imagen.'); return; }
+
+  await document.fonts.load('800 40px Inter');
+  const title = document.getElementById('qrTitle').textContent;
+
+  const CARD = 900, QR = 620;
+  const outCanvas = document.createElement('canvas');
+  outCanvas.width = CARD; outCanvas.height = CARD + 150;
+  const ctx = outCanvas.getContext('2d');
+
+  ctx.fillStyle = '#16342A';
+  ctx.fillRect(0, 0, outCanvas.width, outCanvas.height);
+
+  ctx.fillStyle = '#F2C14E';
+  ctx.font = '800 38px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(title, outCanvas.width/2, 66);
+
+  const cardY = 100;
+  ctx.fillStyle = '#ffffff';
+  roundRect(ctx, (CARD - CARD)/2, cardY, CARD, CARD, 28);
+  ctx.fill();
+
+  ctx.drawImage(src, (CARD - QR)/2, cardY + (CARD - QR)/2, QR, QR);
+
+  ctx.fillStyle = 'rgba(246,243,234,0.75)';
+  ctx.font = '600 26px Inter, sans-serif';
+  ctx.fillText('📲 Escanéame con la cámara', outCanvas.width/2, cardY + CARD + 48);
+
+  const a = document.createElement('a');
+  a.href = outCanvas.toDataURL('image/png');
+  a.download = 'qr-polla-tico.png';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+/* ============ IMAGEN PARA COMPARTIR ============ */
+let mascotImgCache = null;
+function loadMascotImg(){
+  return new Promise(resolve => {
+    if(mascotImgCache){ resolve(mascotImgCache); return; }
+    const img = new Image();
+    img.onload = () => { mascotImgCache = img; resolve(img); };
+    img.onerror = () => resolve(null);
+    img.src = 'mascota-gallo.png';
+  });
+}
+async function generateShareImage(lines, footerUrl){
+  await document.fonts.load('900 60px Anton');
+  await document.fonts.load('700 30px Inter');
+  const mascot = await loadMascotImg();
+
+  const W = 1080, H = 1350;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const grad = ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0, '#16342A'); grad.addColorStop(1, '#0E241D');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 2;
+  for(let y = 0; y < H; y += 60){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+
+  ctx.fillStyle = '#F2C14E';
+  ctx.font = '900 30px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('LA POLLA "TICO"', W/2, 100);
+  ctx.font = '600 22px Inter, sans-serif';
+  ctx.fillStyle = 'rgba(246,243,234,0.8)';
+  ctx.fillText('⚽ Nos divertimos y ganamos 🏆', W/2, 138);
+
+  if(mascot){
+    const mw = 300, mh = 300 * (mascot.height/mascot.width);
+    ctx.drawImage(mascot, (W-mw)/2, 168, mw, mh);
+  }
+
+  function lineAdvance(currentSize, nextSize, gap){
+    return currentSize * 0.32 + nextSize * 0.85 + gap;
+  }
+  let contentStartY = mascot ? 168 + 300*(mascot.height/mascot.width) + 36 : 260;
+  let panelHeight = 50;
+  for(let i = 0; i < lines.length; i++){
+    const cur = lines[i].size || 40;
+    const next = lines[i+1] ? (lines[i+1].size || 40) : cur;
+    const gap = lines[i].gap !== undefined ? lines[i].gap : 24;
+    panelHeight += lineAdvance(cur, next, gap);
+  }
+  ctx.fillStyle = 'rgba(255,255,255,0.05)';
+  roundRect(ctx, 70, contentStartY, W-140, panelHeight, 24);
+  ctx.fill();
+
+  let y = contentStartY + 56 + (lines[0] ? (lines[0].size||40)*0.85 : 0);
+  lines.forEach((line, idx) => {
+    ctx.font = `${line.weight || 700} ${line.size || 40}px ${line.font || 'Inter, sans-serif'}`;
+    ctx.fillStyle = line.color || '#F6F3EA';
+    ctx.textAlign = 'center';
+    ctx.fillText(line.text, W/2, y);
+    const nextSize = lines[idx+1] ? (lines[idx+1].size || 40) : (line.size || 40);
+    const gap = line.gap !== undefined ? line.gap : 24;
+    y += lineAdvance(line.size || 40, nextSize, gap);
+  });
+
+  if(footerUrl){
+    await new Promise(resolve => {
+      const qrDiv = document.createElement('div');
+      qrDiv.style.position = 'fixed'; qrDiv.style.left = '-9999px';
+      document.body.appendChild(qrDiv);
+      new QRCode(qrDiv, {text: footerUrl, width: 220, height: 220, colorDark:'#10202B', colorLight:'#ffffff'});
+      setTimeout(() => {
+        const qrCanvas = qrDiv.querySelector('canvas');
+        const qrImg = qrDiv.querySelector('img');
+        const qrSize = 200;
+        const qx = (W - qrSize)/2, qy = H - qrSize - 86;
+        ctx.fillStyle = '#fff';
+        roundRect(ctx, qx-16, qy-16, qrSize+32, qrSize+32, 16);
+        ctx.fill();
+        if(qrCanvas) ctx.drawImage(qrCanvas, qx, qy, qrSize, qrSize);
+        else if(qrImg) ctx.drawImage(qrImg, qx, qy, qrSize, qrSize);
+        ctx.font = '600 20px Inter, sans-serif';
+        ctx.fillStyle = 'rgba(246,243,234,0.6)';
+        ctx.textAlign = 'center';
+        ctx.fillText('📲 Escanea para entrar', W/2, H-32);
+        document.body.removeChild(qrDiv);
+        resolve();
+      }, 250);
+    });
+  }
+
+  return new Promise(resolve => canvas.toBlob(blob => resolve(blob), 'image/png'));
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r);
+  ctx.arcTo(x+w, y+h, x, y+h, r);
+  ctx.arcTo(x, y+h, x, y, r);
+  ctx.arcTo(x, y, x+w, y, r);
+  ctx.closePath();
+}
+async function shareImageOrFallback(blob, text, filename){
+  const file = new File([blob], filename, {type:'image/png'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    try{ await navigator.share({files:[file], text}); return; }catch(e){}
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => {
+    alert('📥 Se descargó la imagen. Súbela a tu estado de WhatsApp.');
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+  }, 400);
+}
+
+/* ============ LANDING ============ */
+async function initLanding(){
+  document.getElementById('pollasContainer').innerHTML = '<div class="loading-msg">Cargando...</div>';
+  allPollas = await apiGet('getPollas').catch(()=>[]);
+  renderLanding();
+  if(landingTimer) clearInterval(landingTimer);
+  landingTimer = setInterval(updateLandingCountdowns, 30000);
+  if(incomingPollaId){
+    const target = allPollas.find(p => p.id === incomingPollaId);
+    incomingPollaId = '';
+    if(target){ await enterPolla(target.id); }
+  }
+}
+// Refresca los "Cierre de inscripciones en..." de la lista de Pollas sin recargar
+// toda la tarjeta, igual que updateCountdowns hace con los partidos abiertos.
+function updateLandingCountdowns(){
+  document.querySelectorAll('#pollasContainer [data-startdate]').forEach(el => {
+    const sl = startLabel(el.dataset.startdate);
+    el.textContent = sl.text;
+    el.classList.toggle('soon', sl.soon);
+  });
+}
+function renderLanding(){
+  const container = document.getElementById('pollasContainer');
+  const actuales = allPollas.filter(p => p.status === 'actual');
+  const proximas = allPollas.filter(p => p.status === 'proximamente');
+  let html = '';
+  actuales.forEach(p => {
+    const matchesLabel = p.totalMatches ? `<b>${p.matchCount} / ${escapeHtml(p.totalMatches)}</b> partidos` : `<b>${p.matchCount}</b> partidos`;
+    html += `
+      <div class="polla-card" onclick="enterPolla('${p.id}')">
+        <div class="logo-third">${p.imageUrl ? `<img src="${p.imageUrl}" alt="Logo" loading="lazy" onerror="this.style.display='none'">` : `<div class="no-logo">${ICON_BALL.replace('class="stat-icon"','')}</div>`}</div>
+        <div class="card-body">
+          <span class="status-pill actual">Activa</span>
+          ${p.isFreePolla ? '<span class="status-pill free-pill">🎁 Gratuita · solo clasificados</span>' : ''}
+          <h2># ${escapeHtml(p.number)}</h2>
+          ${p.startDate ? (() => { const sl = startLabel(p.startDate); return `<div class="start-date${sl.soon ? ' soon' : ''}" data-startdate="${p.startDate}">${sl.text}</div>`; })() : ''}
+          <div class="stats">
+            <div class="stat-item">${ICON_PEOPLE}<b>${p.participantCount}</b> participantes</div>
+            <div class="stat-item">${ICON_BALL}${matchesLabel}</div>
+          </div>
+          <div class="enter">Entrar a pronosticar →</div>
+        </div>
+      </div>`;
+  });
+  proximas.forEach(p => {
+    const startInfo = p.startDate ? (() => { const sl = startLabel(p.startDate); return `<div class="start-date${sl.soon ? ' soon' : ''}" data-startdate="${p.startDate}">${sl.text}</div>`; })() : '';
+    html += `<div class="upcoming-card"><b>Próximamente</b>Polla "TICO" # ${escapeHtml(p.number)}, muy pronto podrás participar${startInfo}</div>`;
+  });
+  if(actuales.length === 0 && proximas.length === 0) html = '<div class="no-pollas">Todavía no hay ninguna Polla activa.<br>Vuelve pronto.</div>';
+  container.innerHTML = html;
+}
+function goToLanding(){
+  if(countdownTimer){ clearInterval(countdownTimer); countdownTimer = null; }
+  document.getElementById('appScreen').classList.add('hidden');
+  document.getElementById('landingScreen').classList.remove('hidden');
+  currentPolla = null; matches = []; predictionsCache = {}; authedName = null; authedPin = null; myReferralCode = null;
+  selectedBulkMatches.clear();
+  document.getElementById('streakBadge').classList.add('hidden');
+  document.getElementById('miniLeaderboard').classList.add('hidden');
+  history.replaceState(null, '', location.pathname);
+  initLanding();
+}
+async function enterPolla(pollaId){
+  if(landingTimer){ clearInterval(landingTimer); landingTimer = null; }
+  currentPolla = allPollas.find(p => p.id === pollaId);
+  if(!currentPolla) currentPolla = (await apiGet('getPollas')).find(p => p.id === pollaId);
+  document.getElementById('landingScreen').classList.add('hidden');
+  document.getElementById('appScreen').classList.remove('hidden');
+  document.getElementById('pollaTitle').textContent = `Polla "TICO" # ${currentPolla.number}`;
+  document.getElementById('adminModalTitle').textContent = `Administrar Polla # ${currentPolla.number}`;
+  // 🏆 El botón de Ganadores aparece en dos casos independientes:
+  // 1) La Polla ya está 'finalizada' → siempre visible, permanentemente
+  //    (lógica original, no cambia).
+  // 2) El admin activó "showWinnersLive" → visible YA, calculado en vivo
+  //    contra la tabla de posiciones actual de esta Polla (showWinners ya
+  //    usa getStandings, que siempre trae el estado más reciente, así que
+  //    no hace falta ningún cálculo nuevo: solo se destraba la visibilidad).
+  //    Si el admin lo desactiva antes de finalizar, el botón se vuelve a
+  //    ocultar (a menos que la Polla ya esté finalizada).
+  updateWinnersButtonVisibility();
+  document.getElementById('playerName').value = '';
+  document.getElementById('inviteRow').classList.add('hidden');
+  resetAuthUI();
+  await loadMatches();
+  if(countdownTimer) clearInterval(countdownTimer);
+  countdownTimer = setInterval(updateCountdowns, 30000);
+}
+function updateCountdowns(){
+  let needsRerender = false;
+  document.querySelectorAll('[data-closeat]').forEach(el => {
+    const iso = el.dataset.closeat;
+    if(isClosed(iso)){ needsRerender = true; return; } // pasó a "cerrado" desde el último chequeo
+    const label = fmtCountdown(iso);
+    if(label){ el.textContent = label; el.classList.toggle('soon', (new Date(iso)-new Date()) < 3600000); }
+  });
+  // Si algún partido acaba de cerrar, reconstruimos las tarjetas para que se vea
+  // "Cerró" y se bloqueen los inputs de una vez, sin esperar a salir y volver a entrar.
+  if(needsRerender) renderMatches();
+}
+
+/* ============ POLLAS ANTERIORES / GANADORES ============ */
+// 📄 Se muestran de 5 en 5 (con un botón "Ver más" para las siguientes 5) en
+// vez de la lista completa de una. No es paginación real contra el backend
+// (getPollas sigue trayendo todo, pero como la temporada se vacía cada año
+// con "Vaciar temporada" nunca se acumulan cientos) — esto es solo para que
+// la lista no se sienta larga de scrollear cuando ya hay varias Pollas.
+const ARCHIVED_PAGE_SIZE_ = 5;
+let archivedPollasAll_ = [];
+let archivedPollasShown_ = 0;
+
+async function openArchivedPollas(){
+  if(busyFlags.archived) return;
+  busyFlags.archived = true;
+  openOverlay('archivedOverlay');
+  document.getElementById('archivedList').innerHTML = '<p class="hint">Cargando...</p>';
+  try{
+    allPollas = await apiGet('getPollas').catch(()=>allPollas);
+    archivedPollasAll_ = allPollas.filter(p => p.status === 'finalizada');
+    archivedPollasShown_ = ARCHIVED_PAGE_SIZE_;
+    renderArchivedPollasList_();
+  } finally { busyFlags.archived = false; }
+}
+function renderArchivedPollasList_(){
+  const list = document.getElementById('archivedList');
+  if(archivedPollasAll_.length === 0){ list.innerHTML = '<p class="hint">Todavía no hay Pollas finalizadas.</p>'; return; }
+  const visible = archivedPollasAll_.slice(0, archivedPollasShown_);
+  let html = visible.map(p => `
+    <div class="archived-item" onclick="closeOverlay('archivedOverlay'); enterPolla('${p.id}')">
+      <div><b>Polla "TICO" # ${escapeHtml(p.number)}</b><div class="hint">${p.participantCount} participantes · ${p.matchCount} partidos</div></div>
+      <div>›</div>
+    </div>`).join('');
+  if(archivedPollasShown_ < archivedPollasAll_.length){
+    html += `<button class="btn-secondary" style="margin-top:10px;" onclick="showMoreArchivedPollas_()">Ver más</button>`;
+  }
+  list.innerHTML = html;
+}
+function showMoreArchivedPollas_(){
+  archivedPollasShown_ = Math.min(archivedPollasShown_ + ARCHIVED_PAGE_SIZE_, archivedPollasAll_.length);
+  renderArchivedPollasList_();
+}
+
+function groupPodium(standings){
+  const top = [];
+  let medalIdx = 0;
+  let i = 0;
+  while(i < standings.length && medalIdx < 3){
+    const pts = standings[i].totalPoints;
+    const group = standings.filter((s,idx) => idx >= i && s.totalPoints === pts);
+    group.forEach(g => top.push({...g, medalIdx}));
+    i += group.length;
+    medalIdx++;
+  }
+  return top;
+}
+function computeCompetitionRanks(standings){
+  const ranks = [];
+  let i = 0;
+  while(i < standings.length){
+    const pts = standings[i].totalPoints;
+    let j = i;
+    while(j < standings.length && standings[j].totalPoints === pts) j++;
+    for(let k = i; k < j; k++) ranks[k] = i;
+    i = j;
+  }
+  return ranks;
+}
+async function showWinners(pollaId){
+  if(busyFlags.winners) return;
+  busyFlags.winners = true;
+  openOverlay('winnersOverlay');
+  document.getElementById('winnersList').innerHTML = '<p class="hint">Cargando...</p>';
+  try{
+    const polla = allPollas.find(p => p.id === pollaId) || await apiGet('getPollas').then(list => list.find(p=>p.id===pollaId));
+    const standings = await apiGet('getStandings', {pollaId}).catch(()=>[]);
+    document.getElementById('winnersTitle').textContent = `Ganadores · Polla # ${polla.number}`;
+    const medals = ['🥇','🥈','🥉'];
+    const premios = [polla.premio1, polla.premio2, polla.premio3];
+    const podium = groupPodium(standings);
+    const list = document.getElementById('winnersList');
+    if(podium.length === 0){ list.innerHTML = '<p class="hint">No hubo pronósticos registrados en esta Polla.</p>'; }
+    else{
+      list.innerHTML = podium.map(s => `
+        <div class="prize-row">
+          <div class="prize-medal">${medals[s.medalIdx]}</div>
+          <div><div class="prize-place">${escapeHtml(s.name)} · ${s.totalPoints} pts</div><div class="prize-text">${escapeHtml(premios[s.medalIdx] || 'Premio no definido')}</div></div>
+        </div>`).join('');
+    }
+  } finally { busyFlags.winners = false; }
+}
+
+/* ============ AUTENTICACIÓN ============ */
+function resetAuthUI(){
+  authedName = null; authedPin = null; myReferralCode = null;
+  document.getElementById('nameField').classList.remove('authed');
+  document.getElementById('nameStatus').textContent = '';
+  document.getElementById('nameStatus').className = 'name-status';
+  document.getElementById('pinLockedBox').classList.add('hidden');
+  document.getElementById('inviteRow').classList.add('hidden');
+  document.getElementById('bulkToggleRow').classList.add('hidden');
+  document.getElementById('setSecurityAnswerBtn').classList.add('hidden');
+  document.getElementById('payPendingBanner').classList.add('hidden');
+}
+function retryAfterLock(){ document.getElementById('pinLockedBox').classList.add('hidden'); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('playerName');
+  if(input){
+    input.addEventListener('input', () => {
+      if(input.value.trim() === ''){ resetAuthUI(); renderMatches(); }
+      else if(authedName && normalizeName(authedName) !== normalizeName(input.value)){ resetAuthUI(); renderMatches(); }
+    });
+    input.addEventListener('keydown', (ev) => { if(ev.key === 'Enter'){ ev.preventDefault(); checkName(); } });
+  }
+});
+
+async function checkName(){
+  if(busyFlags.checkName) return;
+  const name = document.getElementById('playerName').value.trim();
+  const statusEl = document.getElementById('nameStatus');
+  if(!name){ statusEl.textContent = 'Escribe tu nombre primero.'; statusEl.className = 'name-status err'; return; }
+
+  const pin = prompt('Ingresa o crea tu PIN de 4 dígitos (solo tú lo debes saber):');
+  if(pin === null) return;
+  if(!/^\d{4}$/.test(pin.trim())){ alert('El PIN debe ser de 4 números.'); return; }
+
+  busyFlags.checkName = true;
+  const checkBtn = document.querySelector('.check-btn');
+  checkBtn.disabled = true; checkBtn.textContent = '…';
+  statusEl.textContent = 'Verificando...'; statusEl.className = 'name-status';
+
+  try{
+    const result = await apiPost({action:'authName', pollaId: currentPolla.id, name, pin: pin.trim()});
+    if(!result.ok){
+      if(result.error === 'LOCKED'){
+        statusEl.textContent = '';
+        const esNuevo = confirm(`El nombre "${name}" ya está registrado en el sistema, pero el PIN no coincidió 3 veces.\n\n¿Eres tú (se te olvidó tu PIN) o eres otra persona que se llama igual?\n\n✅ Aceptar → Soy otra persona: registrarme con otro nombre\n❌ Cancelar → Soy yo: contactar al administrador para resetear mi PIN`);
+        if(esNuevo){ await offerRegisterAsNewPerson(); return; }
+        const intentaRecuperar = confirm(`¿Configuraste antes una pregunta de seguridad para recuperar tu PIN?\n\n✅ Aceptar → Intentar recuperar mi PIN yo mismo\n❌ Cancelar → Prefiero contactar al administrador`);
+        if(intentaRecuperar){ await trySelfResetPin(name); return; }
+        document.getElementById('pinLockedBox').classList.remove('hidden');
+        document.getElementById('registerAnywayBtn').classList.remove('hidden');
+      } else if(result.error === 'WRONG_PIN'){
+        statusEl.textContent = `PIN incorrecto (te quedan ${result.attemptsLeft} intento(s)).`; statusEl.className = 'name-status err';
+      } else if(result.error === 'NOT_A_PARTICIPANT'){
+        document.getElementById('registerAnywayBtn').classList.add('hidden');
+        const quiereRegistrarse = confirm(`"${name}" no está en la lista de participantes de esta Polla.\n\n¿Quieres registrarte tú mismo como nuevo participante?`);
+        if(quiereRegistrarse){ await selfRegisterFlow(name, pin.trim()); return; }
+        statusEl.textContent = 'No estás en la lista de participantes.'; statusEl.className = 'name-status err';
+      } else {
+        statusEl.textContent = result.error; statusEl.className = 'name-status err';
+      }
+      authedName = null; authedPin = null;
+      document.getElementById('nameField').classList.remove('authed');
+      return;
+    }
+    document.getElementById('registerAnywayBtn').classList.add('hidden');
+    await onAuthSuccess(result.realName, pin.trim(), statusEl, result.registered, false, result.newInThisPolla, result.needsSecurityAnswer);
+  } finally {
+    busyFlags.checkName = false;
+    checkBtn.disabled = false;
+    checkBtn.textContent = '✓';
+  }
+}
+
+async function offerRegisterAsNewPerson(){
+  const typedName = document.getElementById('playerName').value.trim();
+  const finalName = prompt('¿Con qué otro nombre o apodo quieres registrarte tú?', typedName);
+  if(!finalName || !finalName.trim()) return;
+  const pin = prompt('Crea tu PIN de 4 dígitos (solo para ti):');
+  if(!pin || !/^\d{4}$/.test(pin.trim())){ alert('El PIN debe ser de 4 números.'); return; }
+  await doSelfRegister(finalName.trim(), pin.trim(), typedName);
+}
+
+async function selfRegisterFlow(typedName, pin){
+  const finalName = prompt('¿Con qué nombre deseas inscribirte?', typedName);
+  if(!finalName || !finalName.trim()) return;
+  await doSelfRegister(finalName.trim(), pin);
+}
+
+async function doSelfRegister(finalName, pin){
+  let refCode = incomingRefCode;
+  if(!refCode){
+    const ask = prompt('¿Alguien te invitó a esta Polla? Escribe su código de invitación (o déjalo vacío):', '');
+    refCode = ask ? ask.trim().toUpperCase() : '';
+  }
+
+  const result = await apiPost({action:'selfRegister', pollaId: currentPolla.id, name: finalName, pin, referredByCode: refCode});
+  if(!result.ok){
+    if(result.error === 'DUPLICATE_NAME'){
+      alert(`Ya hay alguien inscrito como "${finalName}" en esta Polla.`);
+      const newName = prompt('¿Con qué otro nombre quieres inscribirte?', finalName);
+      if(newName && newName.trim()) await doSelfRegister(newName.trim(), pin);
+    } else if(result.error === 'CODIGO_INVALIDO'){
+      const retry = confirm(`El código "${refCode}" no existe. ¿Quieres volver a escribirlo?`);
+      if(retry){
+        incomingRefCode = '';
+        await doSelfRegister(finalName, pin);
+      } else {
+        const result2 = await apiPost({action:'selfRegister', pollaId: currentPolla.id, name: finalName, pin, referredByCode: ''});
+        if(!result2.ok){ alert(result2.error || 'No se pudo completar el registro.'); return; }
+        myReferralCode = result2.referralCode;
+        document.getElementById('registerAnywayBtn').classList.add('hidden');
+        await onAuthSuccess(result2.realName, pin, document.getElementById('nameStatus'), true, true, false, result2.needsSecurityAnswer);
+      }
+    } else if(result.error === 'WRONG_PIN'){
+      // Ese nombre ya es la identidad permanente de alguien (de esta Polla u otra):
+      // le pedimos su PIN real en vez de crear una identidad duplicada.
+      const retryPin = prompt(`"${finalName}" ya tiene una cuenta creada en otra Polla. Ingresa tu PIN de siempre (te quedan ${result.attemptsLeft} intento(s)):`);
+      if(retryPin === null) return;
+      if(!/^\d{4}$/.test(retryPin.trim())){ alert('El PIN debe ser de 4 números.'); return; }
+      await doSelfRegister(finalName, retryPin.trim());
+    } else if(result.error === 'LOCKED'){
+      const esOtraPersona = confirm(`Ya intentaste 3 veces con el PIN de "${finalName}" sin éxito.\n\n"${finalName}" ya es la cuenta de otra persona (de esta Polla u otra).\n\n✅ Aceptar → Registrarme con otro nombre\n❌ Cancelar → Contactar al administrador`);
+      if(esOtraPersona){
+        const newName = prompt('¿Con qué otro nombre o apodo quieres registrarte tú?', finalName);
+        if(!newName || !newName.trim()) return;
+        const newPin = prompt('Crea tu PIN de 4 dígitos (solo para ti):');
+        if(!newPin || !/^\d{4}$/.test(newPin.trim())){ alert('El PIN debe ser de 4 números.'); return; }
+        await doSelfRegister(newName.trim(), newPin.trim());
+      }
+    } else if(result.error === 'INSCRIPCIONES_CERRADAS'){
+      alert('😕 Las inscripciones para esta Polla ya cerraron.');
+    } else if(result.error === 'NOT_QUALIFIED'){
+      alert('🎁 Esta Polla es el Concurso Gratuito de Fin de Año, exclusivo para quienes están clasificados hoy en la tabla acumulada del año. Si crees que deberías estar en la lista, contacta al administrador.');
+    } else {
+      alert(result.error || 'No se pudo completar el registro.');
+    }
+    return;
+  }
+  myReferralCode = result.referralCode;
+  incomingRefCode = '';
+  document.getElementById('registerAnywayBtn').classList.add('hidden');
+  await onAuthSuccess(result.realName, pin, document.getElementById('nameStatus'), result.registered, true, false, result.needsSecurityAnswer);
+}
+
+async function trySelfResetPin(name){
+  const securityAnswer = prompt('Escribe la respuesta de tu pregunta de seguridad (la que elegiste al registrarte, ej. tu equipo de fútbol favorito):');
+  if(securityAnswer === null) return;
+  if(!securityAnswer.trim()){ alert('No escribiste ninguna respuesta.'); document.getElementById('pinLockedBox').classList.remove('hidden'); return; }
+  const newPin = prompt('Perfecto. Ahora escribe tu PIN nuevo de 4 dígitos:');
+  if(!newPin || !/^\d{4}$/.test(newPin.trim())){ alert('El PIN debe ser de 4 números.'); return; }
+
+  const result = await apiPost({action:'selfResetPin', name, securityAnswer: securityAnswer.trim(), newPin: newPin.trim()});
+  if(!result.ok){
+    if(result.error === 'NO_SECURITY_ANSWER'){
+      alert('Todavía no tienes una pregunta de seguridad configurada (es una función nueva). Por esta vez sí necesitas al administrador. La próxima vez que entres, te la vamos a pedir para que esto no te vuelva a pasar.');
+    } else if(result.error === 'RESPUESTA_INCORRECTA'){
+      alert('❌ Esa respuesta no coincide con la que registraste.');
+    } else {
+      alert(result.error || 'No se pudo recuperar el PIN.');
+    }
+    document.getElementById('pinLockedBox').classList.remove('hidden');
+    document.getElementById('registerAnywayBtn').classList.remove('hidden');
+    return;
+  }
+  alert(`✅ ¡Listo! Tu PIN nuevo ya quedó guardado, ${name}. Ingresa de nuevo con él.`);
+  document.getElementById('pinLockedBox').classList.add('hidden');
+}
+
+async function askForSecurityAnswer(name, pin){
+  const answer = prompt('🔑 Elige una pregunta de seguridad para poder recuperar tu PIN tú mismo si algún día lo olvidas, sin tener que escribirle al administrador.\n\nEjemplo: tu equipo de fútbol favorito.\n\nEscribe tu respuesta secreta aquí:');
+  if(!answer || !answer.trim()) return false; // se puede configurar después, no es obligatorio
+  const result = await apiPost({action:'setSecurityAnswer', name, pin, securityAnswer: answer.trim()}).catch(()=>({ok:false}));
+  if(result.ok){
+    alert('✅ ¡Listo! Ya podrás recuperar tu PIN tú mismo si lo olvidas.');
+    document.getElementById('setSecurityAnswerBtn').classList.add('hidden');
+    return true;
+  } else {
+    alert('No se pudo guardar. Inténtalo de nuevo en un momento.');
+    return false;
+  }
+}
+
+async function checkMyPaymentStatus(){
+  const banner = document.getElementById('payPendingBanner');
+  if(!authedName || !currentPolla){ banner.classList.add('hidden'); return; }
+  try{
+    const parts = await apiGet('getParticipants', {pollaId: currentPolla.id});
+    const me = parts.find(p => normalizeName(p.name) === normalizeName(authedName));
+    // Solo mostramos algo si está pendiente. Si ya pagó, no aparece nada (no hace falta felicitarlo cada vez que entra).
+    banner.classList.toggle('hidden', !me || me.paid);
+  } catch(err){
+    banner.classList.add('hidden'); // si falla la consulta, mejor no mostrar nada que mostrar un dato viejo/incorrecto
+  }
+}
+
+async function onAuthSuccess(realName, pin, statusEl, registered, isNewRegistration, newInThisPolla, needsSecurityAnswer){
+  authedName = realName; authedPin = pin;
+  document.getElementById('playerName').value = authedName;
+  document.getElementById('nameField').classList.add('authed');
+  document.getElementById('pinLockedBox').classList.add('hidden');
+  document.getElementById('inviteRow').classList.remove('hidden');
+  document.getElementById('bulkToggleRow').classList.remove('hidden');
+  statusEl.textContent = registered ? '✓ ¡Bienvenido! PIN creado correctamente.' : `✓ Bienvenido de nuevo, ${authedName}`;
+  statusEl.className = 'name-status ok';
+  await renderMatches();
+  updateStreakBadge();
+
+  let stillNeedsSecurityAnswer = needsSecurityAnswer;
+  if(isNewRegistration){
+    alert(`🎉 ¡Listo, ${authedName}! Ya estás inscrito en esta Polla.\n\n📲 Usa el botón "💬 Contactar al administrador" para avisarle a ${ADMIN_NAME} y completar tu inscripción.`);
+    if(needsSecurityAnswer){
+      const saved = await askForSecurityAnswer(authedName, authedPin);
+      if(saved) stillNeedsSecurityAnswer = false;
+    }
+  } else if(newInThisPolla){
+    // Ya tenía cuenta de otra Polla, pero es la primera vez que entra a ESTA.
+    alert(`🎉 ¡Bienvenido, ${authedName}! Como ya tenías cuenta de otra Polla, usamos el mismo PIN y quedaste inscrito automáticamente en esta también.\n\n📲 Usa el botón "💬 Contactar al administrador" para avisarle a ${ADMIN_NAME} y completar tu inscripción.`);
+  }
+
+  document.getElementById('setSecurityAnswerBtn').classList.toggle('hidden', !stillNeedsSecurityAnswer);
+  checkMyPaymentStatus();
+}
+
+// 🔥 Racha de aciertos: badge chiquito, solo fuego + número. Se actualiza
+// cada vez que alguien confirma su identidad (onAuthSuccess). Si viene en 0,
+// no se muestra nada (no tiene sentido mostrar "🔥 0", solo agrega ruido).
+async function updateStreakBadge(){
+  const badge = document.getElementById('streakBadge');
+  if(!authedName || !currentPolla){ badge.classList.add('hidden'); return; }
+  try{
+    const result = await apiGet('getStreak', {pollaId: currentPolla.id, name: authedName});
+    if(result && result.streak > 0){
+      badge.textContent = `🔥 ${result.streak}`;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }catch(e){
+    badge.classList.add('hidden'); // si falla, mejor no mostrar nada que un dato viejo
+  }
+}
+
+async function inviteFriends(){
+  if(!authedName) return;
+  if(!myReferralCode){
+    const parts = await apiGet('getParticipants', {pollaId: currentPolla.id}).catch(()=>[]);
+    const me = parts.find(p => normalizeName(p.name) === normalizeName(authedName));
+    myReferralCode = me ? me.referralCode : '';
+  }
+  const link = `${siteUrl()}?polla=${currentPolla.id}&ref=${myReferralCode}`;
+  const text = `⚽ ¡Únete a la Polla "TICO" # ${currentPolla.number}! Usa mi código ${myReferralCode} al registrarte.\n👉 ${link}`;
+  showGlobalLoader();
+  let blob;
+  try{
+    blob = await generateShareImage([
+      {text: `POLLA "TICO" # ${currentPolla.number}`, size: 56, font: 'Anton, sans-serif', color:'#F6F3EA'},
+      {text: `Código de invitación:`, size: 30, color:'rgba(246,243,234,0.7)'},
+      {text: myReferralCode, size: 64, font: 'Anton, sans-serif', color:'#F2C14E', gap: 30},
+    ], link);
+  } finally { hideGlobalLoader(); }
+  await shareImageOrFallback(blob, text, `invitacion-polla-${currentPolla.number}.png`);
+}
+
+function compressImage(file, maxWidth=900, quality=0.72){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxWidth / img.width);
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width * scale; canvas.height = img.height * scale;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', quality).split(',')[1]);
+      };
+      img.onerror = reject; img.src = e.target.result;
+    };
+    reader.onerror = reject; reader.readAsDataURL(file);
+  });
+}
+
+/* ============ PARTIDOS Y CASILLAS ============ */
+async function loadMatches(){
+  document.getElementById('matchesContainer').innerHTML = '<div class="loading-msg">Cargando partidos...</div>';
+  // Estas dos peticiones no dependen una de la otra, así que salen en paralelo en vez de una tras otra.
+  const [matchesResult, allPreds] = await Promise.all([
+    apiGet('getMatches', {pollaId: currentPolla.id}).catch(()=>[]),
+    apiGet('getAllPredictions', {pollaId: currentPolla.id}).catch(()=>({}))
+  ]);
+  matches = matchesResult;
+  predictionsCache = allPreds || {};
+  // Los partidos sin ningún pronóstico no vienen en la respuesta; los dejamos como array vacío
+  // para que el resto del código (que espera un array) no tenga que preguntar caso por caso.
+  matches.forEach(m => { if(!predictionsCache[m.id]) predictionsCache[m.id] = []; });
+  collapsedDateGroups = computeDefaultCollapsedGroups();
+  await renderMatches();
+}
+async function getPredictions(matchId, force){
+  if(!force && predictionsCache[matchId]) return predictionsCache[matchId];
+  const val = await apiGet('getPredictions', {matchId, pollaId: currentPolla ? currentPolla.id : ''}).catch(()=>[]);
+  predictionsCache[matchId] = val;
+  return val;
+}
+async function refreshAllPredictions(){
+  const allPreds = await apiGet('getAllPredictions', {pollaId: currentPolla.id}).catch(()=>({}));
+  predictionsCache = allPreds || {};
+  matches.forEach(m => { if(!predictionsCache[m.id]) predictionsCache[m.id] = []; });
+}
+// Actualiza el caché local al instante tras un envío exitoso, sin tener que volver a pedirle
+// los datos al servidor (eso es lo que hacía sentir lenta la app después de cada envío).
+function updateLocalPrediction(matchId, name, home, away){
+  if(!predictionsCache[matchId]) predictionsCache[matchId] = [];
+  const list = predictionsCache[matchId];
+  const idx = list.findIndex(p => normalizeName(p.name) === normalizeName(name));
+  if(idx >= 0){
+    list[idx] = {...list[idx], home, away, editCount: (Number(list[idx].editCount)||0) + 1};
+  } else {
+    list.push({name, home, away, editCount: 1, points: '', ts: new Date().toISOString()});
+  }
+}
+function pollPercentages(preds){
+  if(preds.length === 0) return null;
+  let home=0, draw=0, away=0;
+  preds.forEach(p => {
+    const h = Number(p.home), a = Number(p.away);
+    if(h > a) home++; else if(h < a) away++; else draw++;
+  });
+  const total = preds.length;
+  return {
+    homePct: Math.round(home/total*100), drawPct: Math.round(draw/total*100), awayPct: Math.round(away/total*100), total
+  };
+}
+
+function computePointsBreakdown(predHome, predAway, actualHome, actualAway, isStarMatch, allPreds){
+  predHome = Number(predHome); predAway = Number(predAway);
+  actualHome = Number(actualHome); actualAway = Number(actualAway);
+  const items = [];
+  const isExactMatch = predHome === actualHome && predAway === actualAway;
+  let base = 0;
+
+  if(isExactMatch){
+    items.push({label: 'Resultado exacto', pts: 5});
+    base = 5;
+  } else {
+    if(predHome === actualHome){ items.push({label: 'Gol del local exacto', pts: 1}); base += 1; }
+    if(predAway === actualAway){ items.push({label: 'Gol del visitante exacto', pts: 1}); base += 1; }
+    const predOutcome = predHome > predAway ? 'L' : (predHome < predAway ? 'V' : 'E');
+    const actualOutcome = actualHome > actualAway ? 'L' : (actualHome < actualAway ? 'V' : 'E');
+    if(predOutcome === actualOutcome){ items.push({label: 'Resultado correcto', pts: 2}); base += 2; }
+    const actualDiff = actualHome - actualAway, predDiff = predHome - predAway;
+    if(actualDiff !== 0 && predDiff === actualDiff){ items.push({label: 'Handicap (diferencia exacta)', pts: 2}); base += 2; }
+  }
+
+  if(isExactMatch && allPreds && allPreds.length > 0){
+    const exactCount = allPreds.filter(p => Number(p.home) === actualHome && Number(p.away) === actualAway).length;
+    if(exactCount / allPreds.length < 0.30){
+      items.push({label: 'Bonus: pocos acertaron el exacto', pts: 1});
+      base += 1;
+    }
+  }
+
+  let total = base;
+  if(isStarMatch && base > 0){
+    items.push({label: '⭐ Partido estrella (x2)', pts: base});
+    total = base * 2;
+  }
+  return {items, total};
+}
+
+async function renderMatches(){
+  const container = document.getElementById('matchesContainer');
+  container.innerHTML = '';
+
+  const sorted = getSortedMatches();
+  if(sorted.length === 0){
+    container.innerHTML = `<div class="empty"><div class="ball">⚽</div>Aún no hay partidos abiertos.</div>`;
+    return;
+  }
+
+  // Agrupar los partidos por fecha (respetando el orden que ya trae getSortedMatches),
+  // así el bloque de cada fecha se arma con los partidos en el mismo orden de siempre.
+  const groups = [];
+  const groupIndexByKey = {};
+  sorted.forEach(m => {
+    const key = dateGroupKey(m.closeAt);
+    if(!(key in groupIndexByKey)){
+      groupIndexByKey[key] = groups.length;
+      groups.push({key, sampleIso: m.closeAt, matches: []});
+    }
+    groups[groupIndexByKey[key]].matches.push(m);
+  });
+
+  groups.forEach(group => {
+    const needed = group.matches.filter(m => !m.isCanceled);
+    const predictedCount = needed.filter(m => {
+      const preds = predictionsCache[m.id] || [];
+      return authedName && preds.find(p => normalizeName(p.name) === normalizeName(authedName));
+    }).length;
+    const isOpen = !collapsedDateGroups.has(group.key);
+    const pillText = authedName
+      ? `${predictedCount}/${needed.length} PRONÓSTICO${needed.length === 1 ? '' : 'S'}`
+      : `${needed.length} PARTIDO${needed.length === 1 ? '' : 'S'}`;
+
+    const section = document.createElement('div');
+    section.className = 'date-group';
+    section.innerHTML = `
+      <div class="date-group-header" onclick="toggleDateGroup('${group.key}')">
+        <span class="date-group-label">${fmtDayHeader(group.sampleIso)}</span>
+        <span class="date-group-pill">${pillText}</span>
+        <span class="date-group-chevron${isOpen ? ' open' : ''}" id="chevron-${group.key}">⌄</span>
+      </div>
+      <div class="date-group-body${isOpen ? '' : ' hidden'}" id="group-body-${group.key}"></div>`;
+    container.appendChild(section);
+
+    const body = section.querySelector('.date-group-body');
+    group.matches.forEach(m => body.appendChild(buildMatchCard(m)));
+  });
+
+  updateCountdowns();
+  updateBulkBar();
+  updateMiniLeaderboard();
+}
+
+// 📊 Mini leaderboard flotante: una píldora pequeña, fija en la esquina,
+// que muestra en qué puesto va el usuario SIN que tenga que abrir la tabla
+// completa. Solo aparece si confirmó su nombre y ya hay tabla calculada
+// (si no ha pronosticado nada, simplemente no aparece, para no mostrar un
+// "vas de último" que desanime a alguien que recién entra).
+async function updateMiniLeaderboard(){
+  const el = document.getElementById('miniLeaderboard');
+  if(!authedName || !currentPolla){ el.classList.add('hidden'); return; }
+  try{
+    const standings = await apiGet('getStandings', {pollaId: currentPolla.id});
+    const myRow = standings.find(s => normalizeName(s.name) === normalizeName(authedName));
+    if(myRow && myRow.matchesScored > 0){
+      el.textContent = `📊 Vas #${myRow.rank + 1} de ${standings.length}`;
+      el.classList.remove('hidden');
+    } else {
+      el.classList.add('hidden');
+    }
+  }catch(e){
+    el.classList.add('hidden');
+  }
+}
+
+// 🏆 Único lugar que decide si el botón "Ganadores" se ve o no — se llama
+// desde los 3 puntos donde puede cambiar (entrar a la Polla, refrescar
+// partidos, guardar el toggle en admin, finalizar la Polla). Oculta también
+// el contenedor (.winners-row), no solo el botón, para que no quede un
+// espacio vacío cuando no hay nada que mostrar.
+function updateWinnersButtonVisibility(){
+  const show = !!(currentPolla && (currentPolla.status === 'finalizada' || currentPolla.showWinnersLive));
+  document.getElementById('winnersToolBtn').classList.toggle('hidden', !show);
+  document.getElementById('winnersRow').classList.toggle('hidden', !show);
+}
+function toggleDateGroup(key){
+  const body = document.getElementById('group-body-' + key);
+  const chevron = document.getElementById('chevron-' + key);
+  if(!body) return;
+  const willOpen = body.classList.contains('hidden');
+  body.classList.toggle('hidden', !willOpen);
+  if(chevron) chevron.classList.toggle('open', willOpen);
+  if(willOpen) collapsedDateGroups.delete(key); else collapsedDateGroups.add(key);
+}
+
+/* ============ TARJETA DE PARTIDO: construida en 5 estados posibles ============
+   buildMatchCard() ya no arma todo el HTML de un tirón: solo decide en cuál de
+   los 5 estados está el partido y delega a la función renderX_Body_ que le
+   corresponde. Cada una de esas funciones es independiente y se puede leer,
+   tocar o probar por separado sin tener que entender las otras 4. El HTML que
+   generan es idéntico al de antes, esto es solo una reorganización. */
+function buildMatchCard(m){
+    const closed = isClosed(m.closeAt);
+    const closeInMs = new Date(m.closeAt) - new Date();
+    const closingSoon = !closed && closeInMs < 3600000;
+
+    let mine = null;
+    const preds = predictionsCache[m.id] || [];
+    if(authedName) mine = preds.find(p => normalizeName(p.name) === normalizeName(authedName));
+
+    const pollHTML = buildPollHTML_(m, preds);
+
+    let bodyHTML;
+    if(m.isCanceled)            bodyHTML = renderCanceledBody_(m);
+    else if(m.resultSubmitted)  bodyHTML = renderResultBody_(m, mine, preds);
+    else if(closed)             bodyHTML = renderClosedNoResultBody_(m, mine, pollHTML);
+    else if(!authedName)        bodyHTML = renderLockedBody_(m, pollHTML);
+    else                        bodyHTML = renderOpenBody_(m, mine, pollHTML);
+
+    return assembleCardShell_(m, bodyHTML, closed, closingSoon);
+}
+
+// Barra de "quién va ganando en las opiniones" (% de local/empate/visitante
+// entre todos los pronósticos). No se muestra si ya hay resultado o si el
+// partido está cancelado.
+function buildPollHTML_(m, preds){
+  const poll = pollPercentages(preds);
+  if(!poll || m.resultSubmitted || m.isCanceled) return '';
+  return `
+      <div class="poll-bar-row">
+        <div class="poll-bar">
+          <div class="seg-home" style="width:${poll.homePct}%"></div>
+          <div class="seg-draw" style="width:${poll.drawPct}%"></div>
+          <div class="seg-away" style="width:${poll.awayPct}%"></div>
+        </div>
+        <div class="poll-labels"><span>${escapeHtml(m.home)} ${poll.homePct}%</span><span>Empate ${poll.drawPct}%</span><span>${poll.awayPct}% ${escapeHtml(m.away)}</span></div>
+      </div>`;
+}
+
+/* ---- ESTADO 1: partido cancelado ---- */
+function renderCanceledBody_(m){
+  return `
+        <div class="teams-row"><div class="team-name">${escapeHtml(m.home)}</div><div class="vs">VS</div><div class="team-name">${escapeHtml(m.away)}</div></div>
+        <div class="lock-note" style="color:var(--red-card); font-weight:700;">
+          🚫 Partido Cancelado<br><span style="font-weight:500; font-size:12px; color:rgba(246,243,234,0.7);">${escapeHtml(m.cancelReason || 'Motivo de fuerza mayor')}</span>
+        </div>`;
+}
+
+/* ---- ESTADO 2: ya se subió el resultado final ---- */
+function renderResultBody_(m, mine, preds){
+  const ptsText = authedName
+    ? (mine ? `Tu pronóstico: ${mine.home}-${mine.away} · Ganaste ${mine.points ?? 0} puntos` : 'No enviaste pronóstico para este partido')
+    : 'Confirma tu nombre arriba para ver tu puntaje';
+
+  let breakdownHTML = '';
+  if(authedName && mine){
+    const breakdown = computePointsBreakdown(mine.home, mine.away, m.actualHome, m.actualAway, m.isStarMatch, preds);
+    if(breakdown.items.length > 0){
+      const parts = breakdown.items.map(i => `+${i.pts} ${i.label}`);
+      breakdownHTML = `
+            <button class="breakdown-toggle" onclick="toggleBreakdown('${m.id}')">¿Cómo sumé esto? <span id="breakdown-arrow-${m.id}">▾</span></button>
+            <div class="pts-breakdown hidden" id="breakdown-${m.id}">${parts.join(' &nbsp;·&nbsp; ')}</div>`;
+    }
+  }
+
+  const shareBtn = (authedName && mine) ? `<button class="submit-btn share" onclick="sharePrediction('${m.id}')">📲 Compartir mi resultado</button>` : '';
+  return `
+        <div class="result-banner">
+          <div class="score">${escapeHtml(m.home)} ${m.actualHome} - ${m.actualAway} ${escapeHtml(m.away)}</div>
+          <div class="pts">${ptsText}</div>
+          ${breakdownHTML}
+        </div>
+        <div class="match-footer">
+          <button class="submit-btn secondary" onclick="showResults('${m.id}')">Ver tabla del partido</button>
+          ${shareBtn}
+        </div>`;
+}
+
+/* ---- ESTADO 3: ya cerró para pronósticos, pero aún sin resultado subido ---- */
+function renderClosedNoResultBody_(m, mine, pollHTML){
+  const homeVal = mine ? mine.home : '-';
+  const awayVal = mine ? mine.away : '-';
+  const shareBtn = mine ? `<button class="submit-btn share" onclick="sharePrediction('${m.id}')">📲 Compartir mi pronóstico</button>` : '';
+
+  return `
+        <div class="teams-row"><div class="team-name">${escapeHtml(m.home)}</div><div class="vs">VS</div><div class="team-name">${escapeHtml(m.away)}</div></div>
+        ${pollHTML}
+        <div class="score-row">
+          <div class="stepper">
+            <input type="text" class="score-input" value="${homeVal}" disabled>
+          </div>
+          <div class="dash">−</div>
+          <div class="stepper">
+            <input type="text" class="score-input" value="${awayVal}" disabled>
+          </div>
+        </div>
+        <div class="match-footer">
+          <button class="submit-btn secondary" onclick="showResults('${m.id}')">📋 Ver pronósticos de todos</button>
+          <div class="status-line" id="status-${m.id}">
+            ${mine ? `Tu pronóstico guardado: ${mine.home} - ${mine.away}` : 'No enviaste pronóstico'}
+          </div>
+          ${shareBtn}
+        </div>`;
+}
+
+/* ---- ESTADO 4: partido abierto, pero el usuario todavía no confirmó su nombre ---- */
+function renderLockedBody_(m, pollHTML){
+  return `
+        <div class="teams-row"><div class="team-name">${escapeHtml(m.home)}</div><div class="vs">VS</div><div class="team-name">${escapeHtml(m.away)}</div></div>
+        ${pollHTML}
+        <div class="lock-note">Confirma tu nombre arriba (✓) para pronosticar este partido.</div>`;
+}
+
+/* ---- ESTADO 5: partido abierto y el usuario puede pronosticar ---- */
+function renderOpenBody_(m, mine, pollHTML){
+  const homeVal = mine ? mine.home : 0;
+  const awayVal = mine ? mine.away : 0;
+  const shareBtn = mine ? `<button class="submit-btn share" onclick="sharePrediction('${m.id}')">📲 Compartir mi pronóstico</button>` : '';
+  const isChecked = selectedBulkMatches.has(m.id);
+
+  const footerHTML = bulkMode ? `
+        <div class="match-footer">
+          <label class="match-bulk-select">
+            <input type="checkbox" id="bulk-check-${m.id}" ${isChecked ? 'checked' : ''} onchange="toggleMatchBulkSelect('${m.id}', this.checked)">
+            <span id="bulk-text-${m.id}">${isChecked ? '✅ Incluido para envío masivo' : '⬜ Omitir este partido'}</span>
+          </label>
+          <div class="status-line" id="status-${m.id}">${mine ? `Último enviado: ${mine.home} - ${mine.away}` : 'Aún no enviado'}</div>
+          ${shareBtn}
+        </div>` : `
+        <div class="match-footer">
+          <button class="submit-btn" id="submit-${m.id}" onclick="submitPrediction('${m.id}')">
+            ${mine ? 'Actualizar pronóstico' : 'Enviar pronóstico'}
+          </button>
+          <div class="status-line" id="status-${m.id}">${mine ? `Enviado: ${mine.home} - ${mine.away}` : ''}</div>
+          ${shareBtn}
+        </div>`;
+
+  return `
+        <div class="teams-row"><div class="team-name">${escapeHtml(m.home)}</div><div class="vs">VS</div><div class="team-name">${escapeHtml(m.away)}</div></div>
+        ${pollHTML}
+        <div class="score-row">
+          <div class="stepper">
+            <button onclick="changeScore('${m.id}','home',1)">+</button>
+            <input type="number" min="0" max="20" class="score-input" id="score-${m.id}-home" value="${homeVal}" oninput="onScoreInput('${m.id}')">
+            <button onclick="changeScore('${m.id}','home',-1)">−</button>
+          </div>
+          <div class="dash">−</div>
+          <div class="stepper">
+            <button onclick="changeScore('${m.id}','away',1)">+</button>
+            <input type="number" min="0" max="20" class="score-input" id="score-${m.id}-away" value="${awayVal}" oninput="onScoreInput('${m.id}')">
+            <button onclick="changeScore('${m.id}','away',-1)">−</button>
+          </div>
+        </div>
+        ${footerHTML}`;
+}
+
+/* ---- Envoltorio común: foto, ticket, número de partido, badges y el body que ya se armó arriba ---- */
+function assembleCardShell_(m, bodyHTML, closed, closingSoon){
+  const card = document.createElement('div');
+  card.className = 'match' + (m.isStarMatch ? ' star-match' : '') + (m.isCanceled ? ' canceled-match' : '');
+  card.id = 'card-' + m.id;
+
+  const closeLabel = m.isCanceled ? 'CANCELADO' : (closed ? `Cerró ${fmtCloseTime(m.closeAt)}` : (fmtCountdown(m.closeAt) || fmtCloseTime(m.closeAt)));
+
+  card.innerHTML = `
+      <div class="match-inner">
+        ${m.isCanceled ? '<div class="stamp">CANCELADO</div>' : (closed && !m.resultSubmitted ? '<div class="stamp">Cerrado</div>' : '')}
+        ${m.imageUrl ? `<img class="match-photo" src="${m.imageUrl}" alt="Partido ${escapeHtml(m.matchNumber)}" loading="lazy" onerror="this.style.display='none'">` : ''}
+        ${m.imageUrl ? '<div class="ticket-notch"></div><div class="ticket-dashes"></div>' : ''}
+        <div class="match-top">
+          <div>
+            <div class="matchnum">Partido ${escapeHtml(m.matchNumber)}</div>
+            <div class="close-time ${closed || m.isCanceled ? 'past' : ''}" ${!closed && !m.isCanceled ? `data-closeat="${m.closeAt}"` : ''}>${closeLabel}</div>
+          </div>
+          <div class="badges-row">
+            ${m.isCanceled ? '<div class="canceled-badge-inline">🚫 Cancelado</div>' : ''}
+            ${m.isStarMatch ? '<div class="star-badge-inline">⭐ Estrella</div>' : ''}
+            ${closingSoon && !m.isCanceled ? '<div class="soon-badge">⏰ Cierra pronto</div>' : ''}
+          </div>
+        </div>
+        ${bodyHTML}
+      </div>`;
+  return card;
+}
+
+function toggleBreakdown(matchId){
+  const el = document.getElementById('breakdown-'+matchId);
+  const arrow = document.getElementById('breakdown-arrow-'+matchId);
+  if(!el) return;
+  el.classList.toggle('hidden');
+  if(arrow) arrow.textContent = el.classList.contains('hidden') ? '▾' : '▴';
+}
+
+function changeScore(matchId, side, delta){
+  const el = document.getElementById(`score-${matchId}-${side}`);
+  if(!el) return;
+  let val = (parseInt(el.value) || 0) + delta;
+  if(val < 0) val = 0; if(val > 20) val = 20;
+  el.value = val;
+  onScoreInput(matchId);
+}
+
+function onScoreInput(matchId){
+  const homeEl = document.getElementById(`score-${matchId}-home`);
+  const awayEl = document.getElementById(`score-${matchId}-away`);
+  if(homeEl && homeEl.value < 0) homeEl.value = 0;
+  if(awayEl && awayEl.value < 0) awayEl.value = 0;
+
+  if(bulkMode){
+    selectedBulkMatches.add(matchId);
+    const cb = document.getElementById(`bulk-check-${matchId}`);
+    if(cb) cb.checked = true;
+    const labelText = document.getElementById(`bulk-text-${matchId}`);
+    if(labelText) labelText.textContent = '✅ Incluido para envío masivo';
+    updateBulkBar();
+  }
+}
+
+async function submitPrediction(matchId){
+  if(!authedName){ alert('Confirma tu nombre primero.'); return; }
+  const match = matches.find(m => m.id === matchId);
+  if(isClosed(match.closeAt)){ alert('Este partido ya cerró.'); await loadMatches(); return; }
+
+  const homeVal = document.getElementById(`score-${matchId}-home`).value;
+  const awayVal = document.getElementById(`score-${matchId}-away`).value;
+  const home = parseInt(homeVal !== '' ? homeVal : 0);
+  const away = parseInt(awayVal !== '' ? awayVal : 0);
+
+  const btn = document.getElementById('submit-'+matchId);
+  btn.disabled = true; btn.textContent = 'Enviando...';
+
+  const result = await apiPost({action:'savePrediction', matchId, name: authedName, home, away, pin: authedPin});
+  if(!result.ok){
+    alert(result.error || 'No se pudo enviar.');
+    btn.disabled = false; btn.textContent = 'Enviar pronóstico';
+    return;
+  }
+  updateLocalPrediction(matchId, authedName, home, away);
+  await renderMatches();
+}
+
+async function sharePrediction(matchId){
+  const m = matches.find(x => x.id === matchId);
+  const preds = predictionsCache[matchId] || [];
+  const mine = preds.find(p => normalizeName(p.name) === normalizeName(authedName||''));
+  if(!mine) return;
+  const link = `${siteUrl()}?polla=${currentPolla.id}`;
+  let text, lines;
+  if(m.resultSubmitted){
+    text = `⚽ Partido ${m.matchNumber}: ${m.home} ${m.actualHome}-${m.actualAway} ${m.away}\nMi pronóstico fue ${mine.home}-${mine.away} → ¡Gané ${mine.points ?? 0} puntos! 🏆\n\n¡Únete a la Polla "TICO" # ${currentPolla.number} aquí! 👉 ${link}`;
+    lines = [
+      {text:`PARTIDO ${m.matchNumber}`, size:34, color:'rgba(246,243,234,0.7)'},
+      {text:`${m.home} ${m.actualHome} - ${m.actualAway} ${m.away}`, size:48, font:'Anton, sans-serif'},
+      {text:`Mi pronóstico: ${mine.home}-${mine.away}`, size:32, gap:8},
+      {text:`¡Gané ${mine.points ?? 0} puntos! 🏆`, size:40, color:'#F2C14E', font:'Anton, sans-serif', gap:30},
+    ];
+  } else {
+    text = `⚽ Ya envié mi pronóstico para ${m.home} vs ${m.away}: ${mine.home}-${mine.away} 😎\n\n¡Únete a la Polla "TICO" # ${currentPolla.number} aquí! 👉 ${link}`;
+    lines = [
+      {text:`PARTIDO ${m.matchNumber}`, size:34, color:'rgba(246,243,234,0.7)'},
+      {text:`${m.home} vs ${m.away}`, size:44, font:'Anton, sans-serif'},
+      {text:`Mi pronóstico: ${mine.home} - ${mine.away}`, size:38, color:'#F2C14E', gap:30},
+    ];
+  }
+  showGlobalLoader();
+  let blob;
+  try{ blob = await generateShareImage(lines, link); } finally { hideGlobalLoader(); }
+  await shareImageOrFallback(blob, text, `pronostico-partido-${m.matchNumber}.png`);
+}
+
+function sharePollaWhatsApp(){
+  const link = `${siteUrl()}?polla=${currentPolla.id}`;
+  const text = `⚽ ¡Únete a la Polla "TICO" # ${currentPolla.number}! 🏆\nPronostica los resultados y gana premios.\n👉 ${link}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+/* ============ ADMIN ============ */
+function clearNewPollaForm(){
+  document.getElementById('newPollaNumber').value = '';
+  document.getElementById('newPollaStatus').value = 'actual';
+  document.getElementById('newPollaStartDate').value = '';
+  document.getElementById('newPollaTotalMatches').value = '';
+  document.getElementById('newPollaImage').value = '';
+  document.getElementById('newPollaIsFree').checked = false;
+}
+function openAdminGate(){
+  const input = document.getElementById('gatePinInput');
+  input.value=''; input.type='password';
+  document.getElementById('gatePinToggle').textContent = '👁️';
+  openOverlay('adminGateOverlay');
+}
+function toggleGatePinVisibility(){
+  const input = document.getElementById('gatePinInput');
+  const btn = document.getElementById('gatePinToggle');
+  const show = input.type === 'password';
+  input.type = show ? 'text' : 'password';
+  btn.textContent = show ? '🙈' : '👁️';
+  input.focus();
+}
+async function checkGatePin(){
+  const pin = document.getElementById('gatePinInput').value;
+  const btn = document.querySelector('#adminGateOverlay .btn-primary');
+  btn.disabled = true; btn.textContent = 'Verificando...';
+  try{
+    const result = await apiPost({action:'authAdmin', pin});
+    if(!result.ok){ alert(adminAuthErrorMessage_(result)); return; }
+    adminPin = pin;
+    adminName = askAdminName_();
+    closeOverlay('adminGateOverlay');
+    allPollas = await apiGet('getPollas').catch(()=>[]);
+    renderPollasAdminList();
+    renderSeasonInfoBox();
+    openOverlay('pollasAdminOverlay');
+  } finally { btn.disabled = false; btn.textContent = 'Entrar'; }
+}
+// Mensaje amigable para los distintos errores que puede devolver authAdmin.
+function adminAuthErrorMessage_(result){
+  if(result.error === 'LOCKED'){
+    return `🔒 Demasiados intentos fallidos. El acceso admin quedó bloqueado por ${result.minutesLeft} minuto(s). Intenta de nuevo más tarde.`;
+  }
+  if(result.attemptsLeft !== undefined){
+    return `Clave incorrecta. Te quedan ${result.attemptsLeft} intento(s) antes de que se bloquee el acceso admin.`;
+  }
+  return 'Clave incorrecta.';
+}
+// Pregunta el nombre de quien administra, para que quede en el historial de
+// cambios quién hizo cada acción. Si cancela, queda como "Admin".
+function askAdminName_(){
+  const name = prompt('¿Cuál es tu nombre? (queda registrado en el historial de cambios)');
+  return (name && name.trim()) ? name.trim() : 'Admin';
+}
+async function addPolla(){
+  const number = document.getElementById('newPollaNumber').value.trim();
+  const status = document.getElementById('newPollaStatus').value;
+  const startDateRaw = document.getElementById('newPollaStartDate').value;
+  const startDate = startDateRaw ? new Date(startDateRaw).toISOString() : '';
+  const totalMatches = document.getElementById('newPollaTotalMatches').value.trim();
+  const file = document.getElementById('newPollaImage').files[0];
+  const isFree = document.getElementById('newPollaIsFree').checked;
+  if(!number){ alert('Escribe el número de la Polla.'); return; }
+  const dup = allPollas.find(p => String(p.number).trim() === number);
+  if(dup){ alert(`Ya existe una Polla con el número ${number}.`); return; }
+
+  const params = {action:'addPolla', number, status, startDate, totalMatches, isFreePolla: isFree.toString(), pin: adminPin, adminName: adminName};
+  if(file){ params.imageBase64 = await compressImage(file, 700, 0.75); params.imageMime = 'image/jpeg'; }
+  const result = await apiPost(params);
+  if(!result.ok){ alert(result.error || 'No se pudo crear.'); return; }
+  clearNewPollaForm();
+  allPollas = await apiGet('getPollas').catch(()=>[]);
+  renderPollasAdminList();
+  renderLanding();
+}
+function renderPollasAdminList(){
+  const list = document.getElementById('pollasAdminList');
+  if(allPollas.length === 0){ list.innerHTML = '<p class="hint">Sin Pollas creadas todavía.</p>'; return; }
+  list.innerHTML = allPollas.map(p => `
+    <div class="list-item">
+      <div class="top-row">
+        <div class="info">
+          <span>Polla # ${escapeHtml(p.number)} <span class="status-tag ${p.status}">${p.status === 'actual' ? 'activa' : p.status}</span>${p.isFreePolla ? ' <span class="status-tag free-tag">🎁 gratuita</span>' : ''}${p.isArchived ? ' <span class="status-tag archived-tag">🗄️ archivada</span>' : ''}
+          <small>${p.participantCount} participantes · ${p.matchCount}${p.totalMatches ? ' / ' + escapeHtml(p.totalMatches) : ''} partidos${p.startDate ? ' · inicia ' + fmtDate(p.startDate) : ''}</small></span>
+        </div>
+        <div class="btn-row">
+          ${p.isArchived ? '' : `
+          <button class="icon-btn" title="Editar datos" onclick="toggleEditPolla('${p.id}')">✏️</button>
+          <button class="icon-btn" title="Marcar como activa" onclick="setPollaStatus('${p.id}','actual')">✅</button>
+          <button class="icon-btn" title="Marcar próximamente" onclick="setPollaStatus('${p.id}','proximamente')">⏳</button>
+          <button class="icon-btn" title="Finalizar" onclick="setPollaStatus('${p.id}','finalizada')">🏁</button>`}
+          ${(p.status === 'finalizada' && !p.isArchived) ? `<button class="icon-btn" title="Archivar manualmente (esto ya pasa solo al finalizar; útil solo para Pollas viejas que quedaron finalizadas sin archivar)" onclick="archivePollaAction('${p.id}')">🗄️</button>` : ''}
+          ${p.isArchived ? `<button class="icon-btn" title="Desarchivar (volver a editar esta Polla)" onclick="desarchivarPollaAction('${p.id}')">📤</button>` : ''}
+          <button class="icon-btn" title="Eliminar" onclick="deletePolla('${p.id}')">🗑️</button>
+        </div>
+      </div>
+      ${p.isArchived ? '' : `
+      <div class="edit-match-box" id="editpolla-${p.id}">
+        <label>Número</label><input id="editpolla-num-${p.id}" type="text" value="${escapeHtml(p.number)}">
+        <label>Total partidos (meta)</label><input id="editpolla-total-${p.id}" type="number" value="${p.totalMatches || ''}">
+        <label>Fecha y hora de inicio</label><input id="editpolla-date-${p.id}" type="datetime-local" value="${toLocalInputValue(p.startDate)}">
+        <label>Reemplazar imagen / logo (opcional)</label><input id="editpolla-img-${p.id}" type="file" accept="image/*">
+        <div class="checkbox-row"><input id="editpolla-free-${p.id}" type="checkbox" ${p.isFreePolla ? 'checked' : ''}><label for="editpolla-free-${p.id}" style="margin:0;">🎁 Polla gratuita de fin de año (solo clasificados)</label></div>
+        <button class="btn-secondary" onclick="savePollaEdit('${p.id}')">Guardar cambios</button>
+      </div>`}
+    </div>
+  `).join('');
+}
+// 🗄️ Archiva una Polla ya finalizada: "duerme" sus partidos y pronósticos
+// en un solo bloque, para que la app no se ponga lenta con el tiempo, SIN
+// borrar su historial — sigue siendo 100% visible desde "Pollas anteriores".
+// Queda congelada (no se le puede editar nada) hasta que se desarchive.
+async function archivePollaAction(id){
+  if(!confirm('¿Archivar esta Polla?\n\nSus partidos y pronósticos se guardan comprimidos (nada se pierde, sigue siendo visible en "Pollas anteriores"), pero la Polla queda congelada: no se le podrá editar nada hasta que se desarchive.')) return;
+  const result = await apiPost({action:'archivePolla', id, pin: adminPin, adminName: adminName});
+  if(!result.ok){ alert(result.error || 'No se pudo archivar.'); return; }
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  renderPollasAdminList();
+  alert('🗄️ Polla archivada.');
+}
+async function desarchivarPollaAction(id){
+  if(!confirm('¿Desarchivar esta Polla? Vuelve a quedar editable como una Polla normal.')) return;
+  const result = await apiPost({action:'desarchivarPolla', id, pin: adminPin, adminName: adminName});
+  if(!result.ok){ alert(result.error || 'No se pudo desarchivar.'); return; }
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  renderPollasAdminList();
+  alert('📤 Polla desarchivada.');
+}
+function toggleEditPolla(id){ document.getElementById('editpolla-'+id).classList.toggle('show'); }
+async function savePollaEdit(id){
+  const number = document.getElementById(`editpolla-num-${id}`).value.trim();
+  const totalMatches = document.getElementById(`editpolla-total-${id}`).value.trim();
+  const startDateRaw = document.getElementById(`editpolla-date-${id}`).value;
+  const startDate = startDateRaw ? new Date(startDateRaw).toISOString() : '';
+  const file = document.getElementById(`editpolla-img-${id}`).files[0];
+  const isFree = document.getElementById(`editpolla-free-${id}`).checked;
+  if(!number){ alert('El número no puede estar vacío.'); return; }
+  const dup = allPollas.find(p => p.id !== id && String(p.number).trim() === number);
+  if(dup){ alert(`Ya existe otra Polla con el número ${number}.`); return; }
+  const params = {action:'editPolla', id, number, startDate, totalMatches, isFreePolla: isFree.toString(), pin: adminPin, adminName: adminName};
+  if(file){ params.imageBase64 = await compressImage(file, 700, 0.75); params.imageMime = 'image/jpeg'; }
+  const result = await apiPost(params);
+  if(!result.ok){ alert(result.error || 'No se pudo guardar.'); return; }
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  // 🏆 Si se editó la Polla que se está viendo ahora mismo, refleja el
+  // cambio del botón de Ganadores de inmediato, sin tener que salir y
+  // volver a entrar a la Polla.
+  if(currentPolla && currentPolla.id === id){
+    currentPolla = allPollas.find(p => p.id === id) || currentPolla;
+    updateWinnersButtonVisibility();
+  }
+  renderPollasAdminList(); renderLanding();
+  alert('✅ Polla actualizada.');
+}
+async function setPollaStatus(id, status){
+  await apiPost({action:'editPolla', id, status, pin: adminPin, adminName: adminName});
+  allPollas = await apiGet('getPollas').catch(()=>[]);
+  renderPollasAdminList(); renderLanding();
+}
+async function deletePolla(id){
+  if(!confirm('⚠️ Esto borra la Polla PERMANENTEMENTE, junto con todos sus partidos, pronósticos y participantes. No se puede deshacer.\n\n¿Seguro que quieres continuar?')) return;
+  const params = {action:'deletePolla', id, pin: adminPin, adminName: adminName};
+  const polla = allPollas.find(p => p.id === id);
+  if(polla && polla.status === 'finalizada'){
+    params.keepPoints = confirm('¿Quieres CONSERVAR los puntos de esta Polla en la tabla acumulada del año?\n\n✅ Aceptar → Conservar (se suman al arrastre)\n❌ Cancelar → Borrarlos junto con la Polla').toString();
+    params.keepTitle = confirm('¿Quieres CONSERVAR el título de campeón de esta Polla en la tabla de Ganadores?\n\n✅ Aceptar → Conservar el título\n❌ Cancelar → Quitarle esa victoria al campeón').toString();
+  }
+  await apiPost(params);
+  allPollas = await apiGet('getPollas').catch(()=>[]);
+  renderPollasAdminList(); renderLanding();
+}
+
+/* ============ ADMIN: DENTRO DE UNA POLLA ============ */
+function clearNewMatchForm(){
+  ['newMatchNumber','newHome','newAway','newImage','newClose'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('newIsStar').checked = false;
+}
+async function openAdmin(){
+  const pin = prompt('Clave de administrador:');
+  if(pin === null) return;
+  const result = await apiPost({action:'authAdmin', pin});
+  if(!result.ok){ alert(adminAuthErrorMessage_(result)); return; }
+  adminPin = pin;
+  adminName = askAdminName_();
+  switchAdminTab('tabParticipantes');
+  renderParticipantsList();
+  renderAdminMatchList();
+  document.getElementById('premio1Input').value = currentPolla.premio1 || '';
+  document.getElementById('premio2Input').value = currentPolla.premio2 || '';
+  document.getElementById('premio3Input').value = currentPolla.premio3 || '';
+  document.getElementById('showWinnersLiveToggle').checked = !!currentPolla.showWinnersLive;
+  applyArchivedAdminLock_();
+  openOverlay('adminOverlay');
+}
+// 🔒 Si la Polla está archivada, el panel de admin queda en modo solo-lectura:
+// se puede seguir viendo todo (tabla, partidos, participantes, premios), pero
+// no se puede tocar nada hasta desarchivarla. El backend ya rechaza estas
+// acciones igual, pero esto evita que el admin haga clic en botones que no
+// van a funcionar y no entienda por qué.
+function applyArchivedAdminLock_(){
+  const archived = !!(currentPolla && currentPolla.isArchived);
+  document.querySelectorAll('#adminOverlay .archived-lock').forEach(el => el.style.display = archived ? 'none' : '');
+  // El mini-formulario de "Corregir premios" es al revés: solo tiene sentido
+  // mostrarlo cuando la Polla SÍ está archivada (si no, ya está el form normal
+  // de premios arriba, dentro de .archived-lock).
+  document.getElementById('archivedPremiosFix').style.display = archived ? '' : 'none';
+  if(!archived) document.getElementById('archivedPremiosForm').style.display = 'none';
+  let banner = document.getElementById('archivedAdminBanner');
+  if(archived){
+    if(!banner){
+      banner = document.createElement('p');
+      banner.id = 'archivedAdminBanner';
+      banner.className = 'hint';
+      banner.style.cssText = 'background:#fff3cd;color:#856404;padding:10px 12px;border-radius:8px;font-weight:600;';
+      document.getElementById('adminModalTitle').insertAdjacentElement('afterend', banner);
+    }
+    banner.textContent = '🗄️ Esta Polla está archivada: puedes ver todo, pero no editar nada hasta desarchivarla desde "Administrar Pollas".';
+  } else if(banner){
+    banner.remove();
+  }
+}
+function switchAdminTab(tabId){
+  document.querySelectorAll('.admin-tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+  document.querySelectorAll('.admin-pane').forEach(p => p.classList.toggle('active', p.id === tabId));
+}
+
+// 🏆 Guarda el toggle de "Ganadores en vivo" apenas se marca/desmarca, sin
+// esperar a que el admin toque "Guardar" en ningún otro lado (a diferencia
+// de los premios, este es un interruptor de sí/no, se siente raro que
+// necesite un botón de guardar aparte). Actualiza currentPolla y el botón
+// del usuario al toque.
+async function toggleShowWinnersLive(checked){
+  const result = await apiPost({action:'editPolla', id: currentPolla.id, showWinnersLive: checked.toString(), pin: adminPin, adminName: adminName});
+  if(!result.ok){
+    alert(result.error || 'No se pudo guardar.');
+    document.getElementById('showWinnersLiveToggle').checked = !checked; // revierte el checkbox si falló
+    return;
+  }
+  currentPolla.showWinnersLive = checked;
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  updateWinnersButtonVisibility();
+}
+
+async function sendRecruitmentReminder(){
+  const parts = await apiGet('getParticipants', {pollaId: currentPolla.id}).catch(()=>[]);
+  const n = parts.length;
+  if(n === 0){ alert('Todavía no hay nadie inscrito en esta Polla.'); return; }
+  const link = `${siteUrl()}?polla=${currentPolla.id}`;
+  const plural = n === 1 ? 'inscrito' : 'inscritos';
+  const text = `⚽ ¡Ya somos ${n} ${plural} en la Polla "TICO" # ${currentPolla.number}! 🏆\n\n¿Qué esperas para inscribirte tú también? 👉 ${link}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+function sendTimeReminder(){
+  if(!currentPolla || !currentPolla.startDate){
+    alert('Esta Polla no tiene configurada una fecha y hora de inicio.');
+    return;
+  }
+  const sl = startLabel(currentPolla.startDate);
+  const link = `${siteUrl()}?polla=${currentPolla.id}`;
+  const text = `⚽ ¡Atención! Nuestras inscripciones para la Polla "TICO" # ${currentPolla.number} están a punto de cerrar. 🏆\n\n⏰ ${sl.text}\n\n¡Ingresa tu pronóstico a tiempo aquí! 👉 ${link}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// 📢 Compara participantes inscritos vs quién ya envió pronóstico para ESE
+// partido puntual, y arma un mensaje de WhatsApp solo con los nombres de
+// quienes faltan — para mandarlo justo antes de que cierre y que nadie se
+// quede fuera por olvido. Usa el mismo caché de pronósticos que ya carga el
+// panel admin (predictionsCache), así que no pega otra llamada pesada.
+async function remindMissingPredictions(matchId){
+  const m = matches.find(x => x.id === matchId);
+  if(!m) return;
+  const parts = await apiGet('getParticipants', {pollaId: currentPolla.id}).catch(()=>[]);
+  if(parts.length === 0){ alert('Todavía no hay participantes inscritos en esta Polla.'); return; }
+  const preds = predictionsCache[matchId] || [];
+  const predictedNames = new Set(preds.map(p => normalizeName(p.name)));
+  const missing = parts.filter(p => !predictedNames.has(normalizeName(p.name))).map(p => p.name);
+  if(missing.length === 0){ alert('🎉 Todos los participantes ya enviaron su pronóstico para este partido.'); return; }
+
+  const link = `${siteUrl()}?polla=${currentPolla.id}`;
+  const nombres = missing.map(n => `• ${n}`).join('\n');
+  const plural = missing.length === 1 ? 'falta' : 'faltan';
+  const verboFalta = missing.length === 1 ? 'ha enviado' : 'han enviado';
+  const text = `⚽ Partido ${m.matchNumber}: ${m.home} vs ${m.away}\n⏰ Cierra ${fmtCloseTime(m.closeAt)}\n\nTodavía ${plural} ${missing.length} que no ${verboFalta} su pronóstico:\n${nombres}\n\n¡No te quedes fuera del sorteo, envíalo antes de que cierre! 👉 ${link}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+function renderPozo(){
+  const box = document.getElementById('pozoBox');
+  if(!box) return;
+  const totalParticipantes = participantsCache.length || currentPolla.participantCount || 0;
+  const recaudado = totalParticipantes * PRECIO_POR_PERSONA;
+  const pozo = recaudado * PORCENTAJE_POZO;
+  box.innerHTML = `
+    <b>💰 Pozo de premios</b>
+    ${totalParticipantes} participante(s) × S/${PRECIO_POR_PERSONA} = S/${recaudado.toFixed(2)} recaudado
+    <br>Pozo (${(PORCENTAJE_POZO * 100).toFixed(1)}%) = <b>S/${pozo.toFixed(2)}</b>
+  `;
+  renderFreeContestBox(); // no se espera: se llena solo cuando responda el servidor
+}
+
+// 🎁 Debajo del pozo de premios: cuántos están clasificados HOY al Concurso
+// Gratuito de Fin de Año (Top ~60% de la tabla acumulada del año, global,
+// no depende de la Polla que se esté viendo en este momento).
+async function renderFreeContestBox(){
+  const box = document.getElementById('freeContestBox');
+  if(!box) return;
+  box.innerHTML = '<b>🎁 Concurso gratuito de fin de año</b>Cargando...';
+  const stats = await apiGet('getFreeContestStats').catch(()=>null);
+  if(!stats || typeof stats.qualifiedCount !== 'number'){
+    box.innerHTML = '<b>🎁 Concurso gratuito de fin de año</b>No se pudo cargar en este momento.';
+    return;
+  }
+  box.innerHTML = `
+    <b>🎁 Concurso gratuito de fin de año</b>
+    ${stats.qualifiedCount} de ${stats.totalParticipants} participante(s) de la tabla acumulada están clasificados hoy (Top ~${(FREE_CONTEST_TOP_PERCENT_UI * 100).toFixed(0)}%).
+  `;
+}
+
+// 📲 Arma la lista de nombres clasificados y abre WhatsApp con la invitación
+// lista para enviar. Como la app no guarda el número de celular de cada
+// participante, se abre sin destinatario fijo (igual que "Compartir esta
+// Polla") para que el admin la reenvíe puntualmente a cada clasificado o a
+// un grupo/lista de difusión armada solo con ellos.
+async function inviteFreeContestQualifiers(){
+  const stats = await apiGet('getFreeContestStats').catch(()=>null);
+  if(!stats || !stats.qualifiedNames || stats.qualifiedNames.length === 0){
+    alert('Todavía no hay participantes clasificados para invitar.');
+    return;
+  }
+  const link = siteUrl();
+  const text = `🎁 ¡Felicidades! Por tu desempeño durante el año en la Polla "TICO", clasificaste al Concurso Gratuito de Fin de Año 🏆\n\n¿Listo para participar? Ingresa aquí 👉 ${link}`;
+  if(!confirm(`Se abrirá WhatsApp con la invitación para los ${stats.qualifiedNames.length} clasificados. Como el sistema no guarda su número de celular, tendrás que elegir a quién enviársela (uno por uno o a un grupo/lista de difusión con ellos). ¿Continuar?`)) return;
+  window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+}
+
+// 🏁 Cuadro de estado de temporada, dentro del panel "Administrar Pollas".
+// Muestra cuántos hay clasificados HOY (los que la app usa ahora mismo para
+// dejar entrar gente a una Polla marcada como gratuita) y, si ya se cerró
+// alguna temporada antes, un resumen de esa última.
+async function renderSeasonInfoBox(){
+  const box = document.getElementById('seasonInfoBox');
+  if(!box) return;
+  box.innerHTML = 'Cargando...';
+  const info = await apiGet('getSeasonInfo').catch(()=>null);
+  if(!info){ box.innerHTML = 'No se pudo cargar el estado de la temporada.'; return; }
+  let html = `<b>🎁 Clasificados hoy a la Polla gratuita:</b> ${info.liveQualifiedCount} de ${info.liveTotalParticipants} (según la tabla acumulada del año en este momento; se actualiza sola, no depende de cerrar temporada).`;
+  if(info.lastClosedSeason){
+    html += `<br><br><b>Última temporada cerrada:</b> ${escapeHtml(info.lastClosedSeason.seasonLabel)} · ${info.lastClosedSeason.qualifiedCount} de ${info.lastClosedSeason.totalParticipants} clasificaron · cerrada por ${escapeHtml(info.lastClosedSeason.closedBy)} el ${fmtDate(info.lastClosedSeason.closedAt)}`;
+  } else {
+    html += '<br><br>Todavía no se ha cerrado ninguna temporada.';
+  }
+  box.innerHTML = html;
+}
+
+// 🏁 Cierra la temporada actual: archiva la tabla acumulada final y quiénes
+// clasificaron, congela esa lista de clasificados (para las Pollas
+// gratuitas) y deja la tabla del año en 0 para la próxima temporada. Es una
+// acción manual, se puede aplicar cuando el admin quiera, y no tiene un
+// botón de "deshacer" fácil, así que pide doble confirmación.
+async function closeSeason(){
+  const label = prompt('¿Cómo se llama la temporada que estás cerrando? (ej. "2026")', new Date().getFullYear().toString());
+  if(label === null) return;
+  const sure = confirm(`⚠️ Esto va a:\n\n1) Guardar (archivar) la tabla acumulada del año TAL COMO ESTÁ ahora mismo, con quiénes clasificaron.\n2) Reiniciar la tabla acumulada del año a 0 para la próxima temporada.\n\nOJO: si todavía tienes una Polla gratuita en curso, ciérrala o termínala ANTES de esto. Una vez que reinicias la tabla, ya no reflejará quién iba clasificando en el año que se archivó.\n\nNo se borra ningún historial de Pollas ni pronósticos viejos, pero esta acción no se puede deshacer fácilmente. ¿Seguro que quieres cerrar la temporada "${label}"?`);
+  if(!sure) return;
+  const result = await apiPost({action:'closeSeason', seasonLabel: label, pin: adminPin, adminName: adminName});
+  if(!result.ok){ alert(result.error || 'No se pudo cerrar la temporada.'); return; }
+  alert(`✅ Temporada "${result.seasonLabel}" cerrada.\n\n${result.qualifiedCount} de ${result.totalParticipants} quedaron clasificados y archivados.\nLa tabla acumulada del año ya está en 0 para la nueva temporada.`);
+  renderSeasonInfoBox();
+}
+
+// 🧹 Vacía la temporada: es el "rework" completo del año — borra TODAS las
+// Pollas "finalizada" (estén o no archivadas, con sus partidos, pronósticos
+// y participantes, y su bloque comprimido si ya estaba archivada), vacía por
+// completo el Historial de Admin y también la Tabla Acumulada. Úsala DESPUÉS
+// de "Cerrar Temporada" (el backend se bloquea si nunca has cerrado una).
+// NO toca Jugadores (sus PINs se conservan), Ganadores, ni el archivo de
+// Temporadas — esas quedan para siempre.
+async function clearSeasonData(){
+  const sure1 = confirm('🧹 Vaciar temporada\n\nEsto va a BORRAR PARA SIEMPRE:\n• TODAS las Pollas marcadas como "finalizada" (estén archivadas o no), con sus partidos, pronósticos y participantes\n• Todo el Historial de Admin\n• La Tabla Acumulada (arrastre de puntos del año)\n\nNO toca: Jugadores (sus PINs se conservan), Ganadores, ni el archivo de Temporadas (eso queda intacto para siempre).\n\nAsegúrate de haber usado "🏁 Cerrar Temporada" ANTES de esto. ¿Continuar?');
+  if(!sure1) return;
+  const sure2 = confirm('Última confirmación: esta acción NO se puede deshacer.\n\n¿Vaciar la temporada ahora?');
+  if(!sure2) return;
+  const result = await apiPost({action:'clearSeasonData', pin: adminPin, adminName: adminName});
+  if(!result.ok){ alert(result.error || 'No se pudo vaciar la temporada.'); return; }
+  alert(`✅ Listo.\n\nPollas borradas: ${result.pollasDeleted}\nBloques archivados borrados: ${result.archivosDeleted}\nPartidos borrados: ${result.matchesDeleted}\nPronósticos borrados: ${result.predictionsDeleted}\nParticipantes borrados: ${result.participantsDeleted}\nHistorialAdmin y Tabla Acumulada: vaciados.`);
+  allPollas = await apiGet('getPollas').catch(()=>[]);
+  renderPollasAdminList();
+  renderLanding();
+  renderSeasonInfoBox();
+}
+
+async function renderParticipantsList(){
+  participantsCache = await apiGet('getParticipants', {pollaId: currentPolla.id}).catch(()=>[]);
+  renderPozo();
+  const list = document.getElementById('participantsList');
+  if(participantsCache.length === 0){ list.innerHTML = '<p class="hint">Sin participantes todavía.</p>'; return; }
+  list.innerHTML = participantsCache.map(p => `
+    <div class="list-item">
+      <div class="top-row">
+        <div class="info">
+          ${escapeHtml(p.name)}
+          <button class="pay-badge ${p.paid ? 'paid' : 'pending'}" onclick="toggleParticipantPaid('${jsAttr(p.name)}', ${p.paid})">${p.paid ? '✅ Pagó' : '⏳ Pendiente'}</button>
+          ${p.referredCount > 0 ? `<span class="ref-tag">👥 invitó a ${p.referredCount}</span>` : ''}
+        </div>
+        ${currentPolla.isArchived ? '' : `
+        <div class="btn-row">
+          <button class="icon-btn" title="Resetear PIN" onclick="resetParticipantPin('${jsAttr(p.name)}')">🔑</button>
+          <button class="icon-btn" title="Editar nombre" onclick="renameParticipant('${jsAttr(p.name)}')">✏️</button>
+          <button class="icon-btn" title="Eliminar de esta Polla" onclick="deleteParticipant('${jsAttr(p.name)}')">🗑️</button>
+        </div>`}
+      </div>
+    </div>
+  `).join('');
+}
+async function toggleParticipantPaid(name, currentlyPaid){
+  await apiPost({action:'setParticipantPaid', pollaId: currentPolla.id, name, paid: (!currentlyPaid).toString(), pin: adminPin, adminName: adminName});
+  await renderParticipantsList();
+}
+async function resetParticipantPin(name){
+  if(!confirm(`¿Resetear el PIN de ${name}?\n\nComo el PIN ahora es único para todas sus Pollas, esto lo resetea en TODAS, no solo en esta.`)) return;
+  await apiPost({action:'resetPin', pollaId: currentPolla.id, name, pin: adminPin, adminName: adminName});
+  alert(`Listo. dile a ${name} que confirme su nombre de nuevo (en cualquier Polla) para crear un nuevo PIN.`);
+}
+async function addParticipants(){
+  const raw = document.getElementById('participantsInput').value;
+  const names = raw.split('\n').map(n => n.trim()).filter(n => n.length > 0);
+  if(names.length === 0){ alert('Escribe al menos un nombre.'); return; }
+  const result = await apiPost({action:'addParticipants', pollaId: currentPolla.id, names: JSON.stringify(names), pin: adminPin, adminName: adminName});
+  document.getElementById('participantsInput').value = '';
+  await renderParticipantsList();
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  currentPolla = allPollas.find(p => p.id === currentPolla.id) || currentPolla;
+  renderAdminMatchList();
+  alert(`${result.added} participante(s) agregados.`);
+}
+// 🗑️ Único botón de eliminar participante: borra su inscripción Y sus
+// pronósticos de ESTA Polla (antes existían dos versiones — una "a medias"
+// que solo borraba la inscripción pero dejaba los pronósticos vivos,
+// haciendo que la persona igual apareciera en la tabla de posiciones sin
+// estar en la lista de admin. Se unificaron en una sola, sin ese hueco).
+async function deleteParticipant(name){
+  if(!confirm(`¿Eliminar a ${name} de esta Polla?\n\nEsto borra su inscripción Y todos sus pronósticos de ESTA Polla puntual. No afecta su cuenta ni sus otras Pollas.`)) return;
+  await apiPost({action:'deleteParticipantFull', pollaId: currentPolla.id, name, pin: adminPin, adminName: adminName});
+  await renderParticipantsList();
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  currentPolla = allPollas.find(p => p.id === currentPolla.id) || currentPolla;
+  await loadMatches();
+  renderAdminMatchList();
+}
+async function renameParticipant(oldName){
+  const newName = prompt('Nuevo nombre para ' + oldName + ':', oldName);
+  if(!newName || newName.trim() === '' || newName.trim() === oldName) return;
+  const result = await apiPost({action:'renameParticipant', pollaId: currentPolla.id, oldName, newName: newName.trim(), pin: adminPin, adminName: adminName});
+  if(!result.ok){ alert(result.error || 'No se pudo renombrar.'); return; }
+  await renderParticipantsList();
+}
+
+async function addMatch(){
+  const matchNumber = document.getElementById('newMatchNumber').value.trim();
+  const home = document.getElementById('newHome').value.trim();
+  const away = document.getElementById('newAway').value.trim();
+  const file = document.getElementById('newImage').files[0];
+  const close = document.getElementById('newClose').value;
+  const isStar = document.getElementById('newIsStar').checked;
+  if(!matchNumber || !home || !away || !file || !close){ alert('Completa número, equipos, foto y hora de cierre.'); return; }
+
+  const btn = document.getElementById('addMatchBtn');
+  btn.disabled = true; btn.textContent = 'Subiendo...';
+  try{
+    const base64 = await compressImage(file);
+    const result = await apiPost({
+      action:'addMatch', pollaId: currentPolla.id, matchNumber, home, away,
+      closeAt: new Date(close).toISOString(), imageBase64: base64, imageMime:'image/jpeg', isStarMatch: isStar.toString(),
+      pin: adminPin, adminName: adminName
+    });
+    if(!result.ok){ alert(result.error || 'No se pudo agregar.'); }
+    else{
+      const closeDate = new Date(close);
+      const msg = `⚽ Nuevo partido${isStar?' ⭐ ESTRELLA':''}: ${home} vs ${away}\nCierra a las ${closeDate.toLocaleTimeString('es-PE',{hour:'numeric',minute:'2-digit'})}\nEnvía tu pronóstico aquí 👉 ${siteUrl()}?polla=${currentPolla.id}`;
+      try{ await navigator.clipboard.writeText(msg); alert('✅ Partido agregado.\n\n📋 Mensaje copiado para WhatsApp:\n\n' + msg); }
+      catch(err){ alert('✅ Partido agregado.\n\nMensaje para WhatsApp:\n\n' + msg); }
+      clearNewMatchForm();
+      await loadMatches();
+      renderAdminMatchList();
+      allPollas = await apiGet('getPollas').catch(()=>allPollas);
+    }
+  } finally { btn.disabled = false; btn.textContent = 'Agregar partido'; }
+}
+
+async function renderAdminMatchList(){
+  const list = document.getElementById('adminMatchList');
+  if(matches.length === 0){ list.innerHTML = '<p class="hint">Sin partidos todavía.</p>'; return; }
+  const sortedMatches = getSortedMatches();
+  list.innerHTML = sortedMatches.map(m => `
+    <div class="list-item" id="admitem-${m.id}">
+      <div class="top-row">
+        <div class="info">
+          ${m.imageUrl ? `<img src="${m.imageUrl}" style="width:40px;height:40px;object-fit:cover;border-radius:8px;">` : ''}
+          <span>Partido ${escapeHtml(m.matchNumber)}: ${escapeHtml(m.home)} vs ${escapeHtml(m.away)} ${m.isCanceled ? '<span class="result-tag canceled">CANCELADO</span>' : (m.isStarMatch?'<span class="star-tag">⭐ ESTRELLA</span>':'')}<small>cierra ${fmtCloseTime(m.closeAt)}</small></span>
+        </div>
+        <div class="btn-row">
+          ${(!currentPolla.isArchived && !m.isCanceled && !m.resultSubmitted) ? `<button class="icon-btn" title="Cancelar y Reemplazar" onclick="openCancelModal('${m.id}')">🚫</button>` : ''}
+          ${currentPolla.isArchived ? '' : `<button class="icon-btn" title="Editar" onclick="toggleEditMatch('${m.id}')">✏️</button>`}
+          ${(!currentPolla.isArchived && !m.isCanceled && !m.resultSubmitted) ? `<button class="icon-btn" title="Avisar quién falta por pronosticar" onclick="remindMissingPredictions('${m.id}')">📢</button>` : ''}
+          <button class="icon-btn" title="Ver pronósticos" onclick="showResults('${m.id}')">📋</button>
+          <button class="icon-btn" title="Exportar" onclick="exportMatchCSV('${m.id}')">⬇️</button>
+          ${currentPolla.isArchived ? '' : `<button class="icon-btn" title="Eliminar" onclick="deleteMatchAdmin('${m.id}')">🗑️</button>`}
+        </div>
+      </div>
+      <div class="admin-summary" id="summary-${m.id}">Cargando participación...</div>
+      ${currentPolla.isArchived ? '' : `
+      <div class="edit-match-box" id="editbox-${m.id}">
+        <label>Número de partido</label><input id="edit-num-${m.id}" type="text" value="${escapeHtml(m.matchNumber)}">
+        <div class="row2">
+          <div><label>Equipo local</label><input id="edit-home-${m.id}" type="text" value="${escapeHtml(m.home)}"></div>
+          <div><label>Equipo visitante</label><input id="edit-away-${m.id}" type="text" value="${escapeHtml(m.away)}"></div>
+        </div>
+        <label>Cierra pronósticos el</label><input id="edit-close-${m.id}" type="datetime-local" value="${toLocalInputValue(m.closeAt)}">
+        <label>Reemplazar foto (opcional)</label><input id="edit-image-${m.id}" type="file" accept="image/*">
+        <div class="checkbox-row"><input id="edit-star-${m.id}" type="checkbox" ${m.isStarMatch?'checked':''}><label for="edit-star-${m.id}" style="margin:0;">⭐ Partido estrella</label></div>
+        <button class="btn-secondary" onclick="saveMatchEdit('${m.id}')">Guardar cambios</button>
+      </div>`}
+      <div style="margin-top:10px;">
+        ${m.isCanceled
+          ? `<span class="result-tag canceled">Partido Cancelado (${escapeHtml(m.cancelReason || 'Fuerza mayor')})</span>`
+          : (m.resultSubmitted
+            ? `<span class="result-tag done">Resultado: ${m.actualHome}-${m.actualAway} ✓</span>
+               ${currentPolla.isArchived ? '' : `
+               <div class="result-row"><input type="number" min="0" id="rh-${m.id}" value="${m.actualHome}"><span>-</span><input type="number" min="0" id="ra-${m.id}" value="${m.actualAway}">
+               <button class="icon-btn" title="Corregir resultado" onclick="submitResult('${m.id}')">✏️ Corregir</button></div>`}`
+            : `<span class="result-tag pending">Sin resultado</span>
+               ${currentPolla.isArchived ? '' : `
+               <div class="result-row"><input type="number" min="0" id="rh-${m.id}" placeholder="${escapeHtml(m.home)}"><span>-</span><input type="number" min="0" id="ra-${m.id}" placeholder="${escapeHtml(m.away)}">
+               <button class="icon-btn" title="Subir resultado" onclick="submitResult('${m.id}')">✅ Subir</button></div>`}`
+          )
+        }
+      </div>
+    </div>
+  `).join('');
+
+  const totalParticipants = currentPolla.participantCount || participantsCache.length || 0;
+  // Una sola llamada que trae los pronósticos de TODOS los partidos, en vez de una por partido.
+  await refreshAllPredictions();
+  sortedMatches.forEach(m => {
+    const preds = predictionsCache[m.id] || [];
+    const el = document.getElementById('summary-'+m.id);
+    if(el) el.textContent = m.isCanceled ? `🚫 Cancelado por: ${m.cancelReason || 'Fuerza mayor'}` : `📊 ${preds.length} de ${totalParticipants} participantes enviaron pronóstico`;
+  });
+}
+
+function openCancelModal(matchId){
+  const m = matches.find(x => x.id === matchId);
+  if(!m) return;
+  document.getElementById('cancelMatchTargetId').value = matchId;
+  document.getElementById('cancelReasonInput').value = 'Emergencia climatológica';
+  document.getElementById('reemplazoHome').value = '';
+  document.getElementById('reemplazoAway').value = '';
+  document.getElementById('reemplazoClose').value = toLocalInputValue(m.closeAt);
+  document.getElementById('reemplazoIsStar').checked = m.isStarMatch || false;
+  openOverlay('cancelMatchOverlay');
+}
+
+async function confirmCancelAndReplace(){
+  const matchId = document.getElementById('cancelMatchTargetId').value;
+  const cancelReason = document.getElementById('cancelReasonInput').value.trim();
+  const rHome = document.getElementById('reemplazoHome').value.trim();
+  const rAway = document.getElementById('reemplazoAway').value.trim();
+  const rFile = document.getElementById('reemplazoImage').files[0];
+  const rClose = document.getElementById('reemplazoClose').value;
+  const rIsStar = document.getElementById('reemplazoIsStar').checked;
+
+  if(!cancelReason){ alert('Escribe el motivo de la cancelación.'); return; }
+  if(!rHome || !rAway || !rFile || !rClose){ alert('Completa los datos del nuevo partido de reemplazo.'); return; }
+
+  const btn = document.getElementById('confirmCancelBtn');
+  btn.disabled = true; btn.textContent = 'Procesando reemplazo...';
+
+  try{
+    const base64 = await compressImage(rFile);
+    const oldMatch = matches.find(m => m.id === matchId);
+    const replacementMatchNumber = oldMatch ? oldMatch.matchNumber : '1';
+
+    const result = await apiPost({
+      action: 'cancelAndReplaceMatch',
+      pollaId: currentPolla.id,
+      cancelMatchId: matchId,
+      cancelReason,
+      newMatchNumber: replacementMatchNumber,
+      newHome: rHome,
+      newAway: rAway,
+      newCloseAt: new Date(rClose).toISOString(),
+      newImageBase64: base64,
+      newImageMime: 'image/jpeg',
+      newIsStar: rIsStar.toString(),
+      pin: adminPin, adminName: adminName
+    });
+
+    if(!result.ok){ alert(result.error || 'No se pudo reemplazar el partido.'); return; }
+
+    closeOverlay('cancelMatchOverlay');
+    alert(`✅ Partido cancelado correctamente.\nSe creó el partido de reemplazo (${rHome} vs ${rAway}).`);
+    await loadMatches();
+    renderAdminMatchList();
+  } finally {
+    btn.disabled = false; btn.textContent = 'Confirmar Cancelación y Reemplazo';
+  }
+}
+
+function toggleEditMatch(matchId){ document.getElementById('editbox-'+matchId).classList.toggle('show'); }
+async function saveMatchEdit(matchId){
+  const matchNumber = document.getElementById(`edit-num-${matchId}`).value.trim();
+  const home = document.getElementById(`edit-home-${matchId}`).value.trim();
+  const away = document.getElementById(`edit-away-${matchId}`).value.trim();
+  const close = document.getElementById(`edit-close-${matchId}`).value;
+  const file = document.getElementById(`edit-image-${matchId}`).files[0];
+  const isStar = document.getElementById(`edit-star-${matchId}`).checked;
+  if(!matchNumber || !home || !away || !close){ alert('Completa todos los campos.'); return; }
+  const params = {action:'editMatch', id: matchId, matchNumber, home, away, closeAt: new Date(close).toISOString(), isStarMatch: isStar.toString(), pin: adminPin, adminName: adminName};
+  if(file){ params.imageBase64 = await compressImage(file); params.imageMime = 'image/jpeg'; }
+  const result = await apiPost(params);
+  if(!result.ok){ alert(result.error || 'No se pudo guardar.'); return; }
+  await loadMatches();
+  renderAdminMatchList();
+  alert('✅ Partido actualizado.');
+}
+async function submitResult(matchId){
+  const home = document.getElementById(`rh-${matchId}`).value;
+  const away = document.getElementById(`ra-${matchId}`).value;
+  if(home === '' || away === ''){ alert('Ingresa el marcador final.'); return; }
+  if(!confirm(`¿Confirmar resultado ${home}-${away}? Se recalculan los puntos de todos.`)) return;
+  await apiPost({action:'submitResult', id: matchId, actualHome: home, actualAway: away, pin: adminPin, adminName: adminName});
+  delete predictionsCache[matchId];
+  await loadMatches();
+  renderAdminMatchList();
+}
+async function deleteMatchAdmin(id){
+  if(!confirm('¿Eliminar este partido y sus pronósticos?')) return;
+  await apiPost({action:'deleteMatch', id, pin: adminPin, adminName: adminName});
+  delete predictionsCache[id];
+  await loadMatches();
+  renderAdminMatchList();
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+}
+async function savePremios(){
+  const premio1 = document.getElementById('premio1Input').value.trim();
+  const premio2 = document.getElementById('premio2Input').value.trim();
+  const premio3 = document.getElementById('premio3Input').value.trim();
+  await apiPost({action:'editPolla', id: currentPolla.id, premio1, premio2, premio3, pin: adminPin, adminName: adminName});
+  currentPolla.premio1 = premio1; currentPolla.premio2 = premio2; currentPolla.premio3 = premio3;
+  alert('Premios guardados.');
+}
+// ✏️ Mini-formulario para corregir premios de una Polla ARCHIVADA, sin
+// desarchivarla (evita recalcular standings y mover datos solo para arreglar
+// un texto). Al abrirse, precarga los premios actuales.
+function toggleArchivedPremiosForm_(){
+  const form = document.getElementById('archivedPremiosForm');
+  const showing = form.style.display !== 'none';
+  if(!showing){
+    document.getElementById('premio1FixInput').value = currentPolla.premio1 || '';
+    document.getElementById('premio2FixInput').value = currentPolla.premio2 || '';
+    document.getElementById('premio3FixInput').value = currentPolla.premio3 || '';
+  }
+  form.style.display = showing ? 'none' : '';
+}
+async function saveArchivedPremiosFix_(){
+  const premio1 = document.getElementById('premio1FixInput').value.trim();
+  const premio2 = document.getElementById('premio2FixInput').value.trim();
+  const premio3 = document.getElementById('premio3FixInput').value.trim();
+  const result = await apiPost({action:'editArchivedPremios', id: currentPolla.id, premio1, premio2, premio3, pin: adminPin, adminName: adminName});
+  if(!result.ok){ alert(result.error || 'No se pudo guardar.'); return; }
+  currentPolla.premio1 = premio1; currentPolla.premio2 = premio2; currentPolla.premio3 = premio3;
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  document.getElementById('archivedPremiosForm').style.display = 'none';
+  alert('✅ Premios corregidos.');
+}
+async function finalizePolla(){
+  const pending = matches.filter(m => !m.resultSubmitted && !m.isCanceled);
+
+  // 🏆 Antes de mostrar el confirm(), calculamos el podio con los datos
+  // actuales para que el admin vea de una vez quién va a quedar campeón
+  // (y pueda cancelar y corregir algo si el resultado se ve raro), en vez
+  // de enterarse recién DESPUÉS de confirmar.
+  const standings = await apiGet('getStandings', {pollaId: currentPolla.id}).catch(()=>[]);
+  const medals = ['🥇','🥈','🥉'];
+  const podium = groupPodium(standings);
+
+  let msg;
+  if(podium.length === 0){
+    msg = `¿Finalizar la Polla # ${currentPolla.number}?\n\nTodavía no hay pronósticos registrados, así que no hay podio que calcular.\n\nQuedará archivada automáticamente. ¿Confirmar?`;
+  } else {
+    const podiumText = podium.map(s => `${medals[s.medalIdx] || '🎖️'} ${s.name} — ${s.totalPoints} pts`).join('\n');
+    const campeonesArr = podium.filter(s => s.medalIdx === 0).map(s => s.name);
+    const campeones = campeonesArr.join(' y ');
+    msg = `¿Finalizar la Polla # ${currentPolla.number}?\n\n${podiumText}\n\nSe registrará a ${campeones} como campeón${campeonesArr.length > 1 ? 'es' : ''}. Quedará archivada automáticamente. ¿Confirmar?`;
+  }
+  if(pending.length > 0){
+    msg = `⚠️ Todavía hay ${pending.length} partido(s) sin resultado subido — puede que el podio de abajo esté incompleto.\n\n${msg}`;
+  }
+  if(!confirm(msg)) return;
+  await apiPost({action:'editPolla', id: currentPolla.id, status:'finalizada', pin: adminPin, adminName: adminName});
+  currentPolla.status = 'finalizada';
+  allPollas = await apiGet('getPollas').catch(()=>allPollas);
+  const updated = allPollas.find(p => p.id === currentPolla.id);
+  if(updated) currentPolla = updated;
+  alert('🏁 Polla finalizada y archivada. Ya se puede ver su tabla y ganadores, pero para editarla hay que desarchivarla primero desde "Administrar Pollas".');
+  updateWinnersButtonVisibility();
+  closeOverlay('adminOverlay');
+}
+async function exportPollaBackup(){
+  const backup = {version: 1, exportedAt: new Date().toISOString(), polla: currentPolla, matches: [], participants: participantsCache};
+  await refreshAllPredictions();
+  matches.forEach(m => {
+    backup.matches.push({...m, predictions: predictionsCache[m.id] || []});
+  });
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `respaldo_polla_${currentPolla.number}_${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+async function exportGlobalBackup(){
+  const result = await apiPost({action:'getGlobalBackup', pin: adminPin, adminName: adminName});
+  if(!result || result.error){ alert(result && result.error ? result.error : 'No se pudo generar el respaldo global.'); return; }
+  const blob = new Blob([JSON.stringify(result, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = `respaldo_global_${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+// Historial de auditoría: quién hizo qué cambio administrativo y cuándo.
+async function loadAdminLog(){
+  const box = document.getElementById('adminLogList');
+  box.innerHTML = '<p class="hint">Cargando...</p>';
+  const result = await apiPost({action:'getAdminLog', pin: adminPin, adminName: adminName});
+  if(!Array.isArray(result)){ box.innerHTML = `<p class="hint">${result.error || 'No se pudo cargar el historial.'}</p>`; return; }
+  if(result.length === 0){ box.innerHTML = '<p class="hint">Todavía no hay cambios registrados.</p>'; return; }
+  box.innerHTML = result.map(r => `
+    <div class="list-item">
+      <div class="top-row">
+        <div class="info">
+          <span><b>${escapeHtml(r.adminName || 'Sin nombre')}</b> · ${escapeHtml(r.action)}
+          <small>${fmtDate(r.timestamp)}${r.details ? ' · ' + escapeHtml(r.details) : ''}</small></span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ============ TABLAS ============ */
+async function showResults(matchId){
+  if(busyFlags['results_'+matchId]) return;
+  busyFlags['results_'+matchId] = true;
+  const match = matches.find(m => m.id === matchId);
+  document.getElementById('resultsTitle').textContent = `Partido ${match.matchNumber}: ${match.home} vs ${match.away}`;
+  document.getElementById('resultsTable').innerHTML = '<tr><td>Cargando...</td></tr>';
+  openOverlay('resultsOverlay');
+  try{
+    const preds = await getPredictions(matchId, true);
+    const table = document.getElementById('resultsTable');
+    let userScoredExactOrMVP = false;
+
+    if(preds.length === 0){ table.innerHTML = '<tr><td>Nadie ha enviado pronóstico todavía.</td></tr>'; }
+    else{
+      const maxPts = match.resultSubmitted ? Math.max(...preds.map(p => Number(p.points)||0)) : null;
+      let rows = `<tr><th>Nombre</th><th>Pronóstico</th>${match.resultSubmitted ? '<th>Puntos</th>' : ''}</tr>`;
+      
+      preds.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => {
+        const isExact = match.resultSubmitted && Number(p.home) === Number(match.actualHome) && Number(p.away) === Number(match.actualAway);
+        const isMVP = match.resultSubmitted && maxPts > 0 && Number(p.points) === maxPts;
+        const isMe = authedName && normalizeName(p.name) === normalizeName(authedName);
+
+        if(isMe && (isExact || isMVP)) userScoredExactOrMVP = true;
+
+        /* PARCHE MVP PEAGADO AL NOMBRE DEL PARTICIPANTE */
+        rows += `<tr>
+          <td>
+            <span style="display:inline-flex; align-items:center;">
+              ${escapeHtml(p.name)}
+              ${isMVP ? `<span class="mvp-patch">${ICON_GOLD_EGG}MVP</span>` : ''}
+            </span>
+          </td>
+          <td>${p.home} - ${p.away}</td>
+          ${match.resultSubmitted ? `<td class="pts${isExact?' max':''}">${p.points ?? 0}</td>` : ''}
+        </tr>`;
+      });
+      table.innerHTML = rows;
+    }
+
+    if(userScoredExactOrMVP) setTimeout(launchConfetti, 200);
+
+  } finally { busyFlags['results_'+matchId] = false; }
+}
+
+function getPrevRanks(key){ try{ return JSON.parse(localStorage.getItem('ranks_'+key) || '{}'); }catch(e){ return {}; } }
+function saveRanks(key, standings){
+  const ranks = {}; standings.forEach((s,i) => ranks[normalizeName(s.name)] = i);
+  localStorage.setItem('ranks_'+key, JSON.stringify(ranks));
+}
+function renderStandingsTable(tableEl, standings, rankKey, sequential){
+  const prevRanks = getPrevRanks(rankKey);
+  if(standings.length === 0){ tableEl.innerHTML = '<tr><td>Todavía no hay datos. 🕐</td></tr>'; return; }
+  const medals = ['🥇','🥈','🥉'];
+  let currentRank = 0;
+  const compRanks = standings.map((s, i) => {
+    if (sequential) return i; // tabla acumulada: cada persona con su propio número, sin premios de por medio
+    if (i > 0 && s.totalPoints < standings[i - 1].totalPoints) {
+      currentRank++;
+    }
+    return currentRank;
+  });
+
+  const isYearlyTable = rankKey === 'yearly';
+  let rows = '<tr><th>#</th><th>Nombre</th><th>Pts</th><th>PJ</th></tr>';
+
+  standings.forEach((s, i) => {
+    const key = normalizeName(s.name);
+    let move = '';
+
+    if (prevRanks[key] !== undefined) {
+      if (prevRanks[key] > i) move = '<span class="rank-move up">▲</span>';
+      else if (prevRanks[key] < i) move = '<span class="rank-move down">▼</span>';
+    }
+
+    const rIdx = compRanks[i];
+    const rankLabel = medals[rIdx] ? medals[rIdx] : (rIdx + 1);
+
+    // 🎁 Solo en la tabla acumulada del año se pinta verde/rojo según si
+    // clasifica o no al Concurso Gratuito de Fin de Año.
+    let rowClass = '';
+    if(isYearlyTable){
+      rowClass = s.qualifiesFreeContest ? ' class="row-qualified"' : ' class="row-not-qualified"';
+    }
+
+    rows += `<tr${rowClass}><td>${move}${rankLabel}</td><td>${escapeHtml(s.name)} <button class="badges-btn" onclick="showBadges('${jsAttr(s.name)}', '${rankKey}')">🏅 Insignias</button></td><td class="pts">${s.totalPoints}</td><td>${s.matchesScored}</td></tr>`;
+  });
+  tableEl.innerHTML = rows;
+  saveRanks(rankKey, standings);
+}
+async function openStandings(){
+  if(busyFlags.standings) return;
+  busyFlags.standings = true;
+  openOverlay('standingsOverlay');
+  document.getElementById('standingsTable').innerHTML = '<tr><td>Cargando...</td></tr>';
+  try{
+    const standings = await apiGet('getStandings', {pollaId: currentPolla.id}).catch(()=>[]);
+    renderStandingsTable(document.getElementById('standingsTable'), standings, 'polla_'+currentPolla.id);
+  } finally { busyFlags.standings = false; }
+}
+async function openYearlyStandings(){
+  if(busyFlags.yearly) return;
+  busyFlags.yearly = true;
+  openOverlay('yearlyOverlay');
+  document.getElementById('yearlyTable').innerHTML = '<tr><td>Cargando...</td></tr>';
+  try{
+    const standings = await apiGet('getYearlyStandings').catch(()=>[]);
+    renderStandingsTable(document.getElementById('yearlyTable'), standings, 'yearly', true);
+  } finally { busyFlags.yearly = false; }
+}
+
+/* ============ 🏆 TABLA DE GANADORES (histórico, de todas las Pollas) ============ */
+async function openHallOfFame(){
+  if(busyFlags.hallOfFame) return;
+  busyFlags.hallOfFame = true;
+  openOverlay('hallOfFameOverlay');
+  const list = document.getElementById('hallOfFameList');
+  list.innerHTML = '<p class="hint">Cargando...</p>';
+  try{
+    const ganadores = await apiGet('getGanadores').catch(()=>[]);
+    if(!ganadores || ganadores.length === 0){
+      list.innerHTML = '<p class="hint">Todavía no hay ganadores registrados.</p>';
+      return;
+    }
+    list.innerHTML = ganadores.map((g, idx) => `
+      <div class="ganador-row ${idx === 0 ? 'top1' : ''}">
+        <div class="ganador-rank">${idx + 1}</div>
+        <div class="ganador-name">${escapeHtml(g.name)}</div>
+        <div class="ganador-count">${g.wins} 🏆</div>
+      </div>`).join('');
+  } finally { busyFlags.hallOfFame = false; }
+}
+
+/* ============ INSIGNIAS MEJORADAS Y ÚNICAS ============ */
+async function showBadges(name, rankKey){
+  document.getElementById('badgesTitle').textContent = `Insignias de ${name}`;
+  document.getElementById('badgesList').innerHTML = '<p class="hint">Cargando...</p>';
+  openOverlay('badgesOverlay');
+  const isYearly = rankKey === 'yearly';
+  const standings = isYearly
+    ? await apiGet('getYearlyStandings').catch(()=>[])
+    : await apiGet('getStandings', {pollaId: currentPolla.id}).catch(()=>[]);
+  const me = standings.find(s => normalizeName(s.name) === normalizeName(name));
+  const exactCount = me ? (me.exactCount || 0) : 0;
+  const mvpCount = me ? (me.mvpCount || 0) : 0;
+  const matchesPlayed = me ? (me.matchesScored || 0) : 0;
+  const scope = isYearly ? 'en todo el año' : 'en esta Polla';
+
+  const badges = [];
+
+  if(mvpCount >= 7) badges.push({icon:'👑', title:'Recolector de MVPs (Única)', desc:`¡Leyenda! Ha sido el jugador MVP en 7 o más partidos ${scope}`});
+  if(exactCount >= 5) badges.push({icon:'💎', title:'Puntería de Diamante (Especial)', desc:`5 o más marcadores exactos ${scope}`});
+  if(me && me.totalPoints >= 50) badges.push({icon:'🌟', title:'Estrella de la Polla (Especial)', desc:`Superó los 50 puntos acumulados ${scope}`});
+  if(me && me.rank === 0) badges.push({icon:'🏆', title:'Líder Supremo (Única)', desc:`Ocupa el puesto #1 actual de la clasificación`});
+
+  if(exactCount >= 1) badges.push({icon:'🎯', title:'Ojo de Águila', desc:`Acertó el marcador exacto en ${exactCount} ${exactCount===1?'partido':'partidos'}`});
+  if(exactCount >= 3) badges.push({icon:'🔥', title:'Pleno Caliente', desc:`3 o más marcadores exactos ${scope}`});
+  if(mvpCount >= 1) badges.push({icon:'🥚', title:'Jugador de la Fecha', desc:`Ha sido MVP al menos 1 vez ${scope}`});
+  if(matchesPlayed >= 3) badges.push({icon:'🌱', title:'Recién Llegado', desc:`Pronosticó sus primeros 3 partidos ${scope}`});
+  if(matchesPlayed >= 10) badges.push({icon:'🛡️', title:'Inquebrantable', desc:`10 o más partidos pronosticados ${scope}`});
+  if(me && me.totalPoints >= 20) badges.push({icon:'⚡', title:'Racha de Puntos', desc:`Superó los 20 puntos acumulados ${scope}`});
+
+  const list = document.getElementById('badgesList');
+  if(badges.length === 0){ list.innerHTML = `<p class="hint">Todavía no tiene insignias ${scope}.</p>`; }
+  else{
+    list.innerHTML = badges.map(b => `<div class="prize-row"><div class="prize-medal">${b.icon}</div><div><div class="prize-place">${b.title}</div><div class="prize-text">${b.desc}</div></div></div>`).join('');
+  }
+}
+
+function renderPrizes(){
+  const list = document.getElementById('prizesList');
+  const p = currentPolla || {};
+  const items = [
+    {medal:'🥇', place:'Primer lugar', text: p.premio1 || 'Aún no definido'},
+    {medal:'🥈', place:'Segundo lugar', text: p.premio2 || 'Aún no definido'},
+    {medal:'🥉', place:'Tercer lugar', text: p.premio3 || 'Aún no definido'},
+  ];
+  list.innerHTML = items.map(i => `<div class="prize-row"><div class="prize-medal">${i.medal}</div><div><div class="prize-place">${i.place}</div><div class="prize-text">${escapeHtml(i.text)}</div></div></div>`).join('');
+}
+const _origOpenOverlay = openOverlay;
+openOverlay = function(id){ if(id === 'prizesOverlay') renderPrizes(); _origOpenOverlay(id); };
+
+/* ============ EXPORTAR CSV ============ */
+function csvEscape(val){ const s = String(val ?? ''); if(s.includes(';') || s.includes('"') || s.includes('\n')) return '"' + s.replace(/"/g,'""') + '"'; return s; }
+function downloadCSV(filename, rows){
+  const BOM = '\uFEFF';
+  const content = BOM + rows.map(r => r.map(csvEscape).join(';')).join('\n');
+  const blob = new Blob([content], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+async function exportMatchCSV(matchId){
+  const match = matches.find(m => m.id === matchId);
+  const preds = await getPredictions(matchId, true);
+  const rows = [['Partido','Equipo Local','Equipo Visitante','Nombre','Marcador Local','Marcador Visitante','Puntos']];
+  preds.sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => rows.push([`Partido ${match.matchNumber}`, match.home, match.away, p.name, p.home, p.away, p.points ?? '']));
+  downloadCSV(`pronosticos_partido_${match.matchNumber}.csv`, rows);
+}
+async function exportAllCSV(){
+  const rows = [['Partido','Equipo Local','Equipo Visitante','Nombre','Marcador Local','Marcador Visitante','Puntos']];
+  await refreshAllPredictions();
+  matches.forEach(m => {
+    const preds = predictionsCache[m.id] || [];
+    [...preds].sort((a,b)=>a.name.localeCompare(b.name)).forEach(p => rows.push([`Partido ${m.matchNumber}`, m.home, m.away, p.name, p.home, p.away, p.points ?? '']));
+  });
+  downloadCSV(`pronosticos_polla_${currentPolla.number}.csv`, rows);
+}
+
+initLanding();
+
+/* ============ SERVICE WORKER (para que se pueda instalar como app) ============ */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch((err) => {
+      console.warn('No se pudo registrar el service worker:', err);
+    });
+  });
+}
+
+/* ============ BOTÓN "INSTALAR APP" EN LA PANTALLA PRINCIPAL ============ */
+function isStandaloneMode(){
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+function isIOS(){
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
+// Chrome/Android: el navegador dispara este evento cuando decide que la app
+// es instalable. Lo interceptamos para lanzarlo nosotros cuando el usuario
+// toque nuestro botón, en vez de depender del avisito nativo poco visible.
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if(!isStandaloneMode()) document.getElementById('installAppBtn')?.classList.remove('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  document.getElementById('installAppBtn')?.classList.add('hidden');
+});
+
+async function handleInstallClick(){
+  if(deferredInstallPrompt){
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    document.getElementById('installAppBtn')?.classList.add('hidden');
+  } else if(isIOS()){
+    alert('Para instalarla en iPhone:\n\n1. Toca el botón "Compartir" en Safari (el cuadrado con la flecha hacia arriba).\n2. Elige "Agregar a pantalla de inicio".');
+  }
+}
+
+// iPhone nunca dispara beforeinstallprompt (Apple no lo soporta), así que ahí
+// mostramos el botón igual, pero con instrucciones manuales en vez del prompt nativo.
+if(isIOS() && !isStandaloneMode()){
+  document.getElementById('installAppBtn')?.classList.remove('hidden');
+}
+
+</script>
+</body>
+</html>
